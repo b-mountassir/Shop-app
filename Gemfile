@@ -74,3 +74,5 @@ gem "omniauth-rails_csrf_protection"
 gem 'aws-sdk-s3'
 
 gem 'image_processing', '~> 1.2'
+
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'

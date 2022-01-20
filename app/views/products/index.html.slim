@@ -1,0 +1,6 @@
+h1 = @category.name
+
+- @products.each do |product|
+    .card 
+        .product__title = link_to product.title, category_product_path(params[:category_id], product.id)
+        span = product.price
