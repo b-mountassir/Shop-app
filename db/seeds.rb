@@ -11,6 +11,31 @@ require 'faker'
     Category.create(name: Faker::Commerce.department)
 end
 
-# Faker::Commerce.product_name
 
-# Faker::Commerce.price
+PRODUCTS_COUNT = 100
+
+MAX_CATEGORIES = 3
+
+CATEGORIES = Category.all
+
+PRODUCTS_COUNT.times do
+
+  title = ''
+
+  # generate unique title
+  loop do
+    title = Faker::Commerce.product_name
+    break unless Product.exists?(title: title)
+  end
+
+  product = Product.new(
+    title: title,
+    price: Faker::Commerce.price
+  )
+
+  num_categories = 1 + rand(MAX_CATEGORIES)
+  product.categories = CATEGORIES.sample(num_categories)
+
+  product.save!
+
+end
