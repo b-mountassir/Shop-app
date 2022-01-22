@@ -8,7 +8,7 @@ The following requirements are written base on the Behavior-Driven Stories. UI i
 - [X] **Optional:** User should be able to change his info.
 
 ## Categories
-- [ ] Categories should be created by the platform admin, buyer and seller will use pre-made categogies.
+- [x] Categories should be created by the platform admin, buyer and seller will use pre-made categogies.
 
 ## Buyer:
 - [ ] **Buyer should be able to see categories and product on landing page.** (`host/`)
