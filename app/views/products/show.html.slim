@@ -1,3 +1,7 @@
 h1.product__title = @product.title
 span = @product.price
 
+.product__desc = @product.description
+br
+- if current_user == @product.seller
+    = link_to 'Edit product', edit_seller_product_path(@product)

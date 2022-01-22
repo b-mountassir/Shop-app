@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :categories, foreign_key: :admin_id
+  has_many :products, foreign_key: :seller_id
   rolify
   before_create :set_default_role
   # Include default devise modules. Others available are:

@@ -1,6 +1,8 @@
+= render "devise/shared/error_messages", resource: resource
+
 h2 Sign up
 = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = render "devise/shared/error_messages", resource: resource
+
 
   .field
     = f.label :email
@@ -27,8 +29,8 @@ h2 Sign up
     = f.label :roles 
     br
     - Role.where.not(name: "admin").each do |role|
-      = f.radio_button :roles, role.name 
-      span.role-name = role.name
+      = f.radio_button :roles, role.name, id: "user_" + role.name
+      = f.label role.name
       br
 
   .actions

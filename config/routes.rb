@@ -6,4 +6,10 @@ Rails.application.routes.draw do
     resources :products
   end
 
+  namespace :admin do
+    resources :categories
+  end
+  namespace :seller do
+    resources :products
+  end
 end

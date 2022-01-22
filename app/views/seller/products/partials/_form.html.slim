@@ -1,0 +1,29 @@
+= form_with(model: [:seller, @product]) do |form|
+  - if @product.errors.any?
+    #error_explanation
+    h2 = pluralize(@product.errors.count, "error")
+      | prohibited this product from being saved:
+
+      ul
+        - @product.errors.each do |error|
+          li = error.full_message
+
+
+  .field 
+    = form.label :title
+    = form.text_field :title
+
+  .field
+    = form.label :description
+    = form.rich_text_area :description
+
+  .field
+    = form.label :price
+    = form.number_field :price
+    
+  .field
+    = form.label :stock
+    = form.number_field :stock
+
+  .actions
+    = form.submit

@@ -5,6 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+User.create(email: "mb.bouyebla@gmail.com", password: "gagafour2!")
+User.find(1).add_role :admin
 require 'faker'
 
 20.times do 
@@ -35,7 +37,7 @@ PRODUCTS_COUNT.times do
 
   num_categories = 1 + rand(MAX_CATEGORIES)
   product.categories = CATEGORIES.sample(num_categories)
-
+  product.seller = User.find(1)
   product.save!
 
 end
