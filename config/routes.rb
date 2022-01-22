@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :categories
+    get "/dashboard", to: 'dashboard#index'
   end
   namespace :seller do
     resources :products

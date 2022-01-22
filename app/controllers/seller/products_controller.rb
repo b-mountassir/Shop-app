@@ -2,7 +2,7 @@ class Seller::ProductsController < ApplicationController
     before_action :authenticate_user!, only: [:new, :create, :edit, :destroy, :update] ## require user to login 
     before_action :set_product, only: [:show, :edit, :update, :destroy ]
     def new
-        @product = Product.new
+        @product = Product.new(category_ids: params[:category_id])
         authorize @product
     end
 
@@ -11,9 +11,10 @@ class Seller::ProductsController < ApplicationController
     end
 
     def create
-        authorize @product
+       
         @product = Product.new(product_params)
         @product.seller = current_user
+        authorize @product
         respond_to do |format|
             if @product.save
                 format.html { redirect_to edit_seller_product_path(@product), notice: "Product was successfully created." }
@@ -37,9 +38,11 @@ class Seller::ProductsController < ApplicationController
 
     def destroy
         authorize @product
+        @product_category = ProductCategory.find_by_product_id(@product.id)
+        @product_category.destroy
         @product.destroy
         respond_to do |format|
-            format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
+            format.html { redirect_to root_path, notice: "Product was successfully destroyed." }
         end
     end
 
@@ -50,7 +53,7 @@ class Seller::ProductsController < ApplicationController
 
     
     def product_params
-        params.require(:product).permit(:title, :description, :price, :stock)
+        params.require(:product).permit(:title, :description, :price, :stock, :category_ids)
     end
     
 end
