@@ -8,15 +8,15 @@ The following requirements are written base on the Behavior-Driven Stories. UI i
 - [X] **Optional:** User should be able to change his info.
 
 ## Categories
-- [x] Categories should be created by the platform admin, buyer and seller will use pre-made categogies.
+- [X] Categories should be created by the platform admin, buyer and seller will use pre-made categogies.
 
 ## Buyer:
-- [ ] **Buyer should be able to see categories and product on landing page.** (`host/`)
-    - [ ] It is not required to show all categories on landing page. However trending categories should be displayed (like clothing, electronics...)
-    - [ ] 5 products should be displayed for each trending categories order by latest created. **optional:** or most bought products
-    - [ ] Each product should be displayed with main picture and name, price, seller name
-- [ ] **Buyer should be able to search (by name) or filter products (by categories) and sort results by price.**
-- [ ] **Buyer should be able to see products which belongs to a categories** using path: `host/category_name/`
+- [X] **Buyer should be able to see categories and product on landing page.** (`host/`)
+    - [X] It is not required to show all categories on landing page. However trending categories should be displayed (like clothing, electronics...)
+    - [X] 5 products should be displayed for each trending categories order by latest created. **optional:** or most bought products
+    - [X] Each product should be displayed with main picture and name, price, seller name
+- [X] **Buyer should be able to search (by name) or filter products (by categories) and sort results by price.**
+- [X] **Buyer should be able to see products which belongs to a categories** using path: `host/category_name/`
 - [ ] **Buyer should be able to see product details when he clicks on one.**
     - [ ] There should be a single product detail page showing all product details (UI [examples](https://www.aliexpress.com/item/1005001423263333.html))
 - [ ] **Buyer should be able to add products to cart for making order**
