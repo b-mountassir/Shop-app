@@ -4,6 +4,9 @@ h1.page-title = @category.name
         .card 
             .product__title = link_to product.title, category_product_path(params[:category_id], id: product.slug)
             span = number_to_currency product.price
+
+= sanitize pagy_nav(@pagy)
+
 .btn__group
     - if user_signed_in? and (current_user.has_role? :seller or current_user.has_role? :admin) 
         = link_to 'New product', new_seller_product_path(category_ids: params[:category_id]), class: "btn btn__create"
