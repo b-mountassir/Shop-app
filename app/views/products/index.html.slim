@@ -3,10 +3,11 @@ h1.page-title = @category.name
     - @products.each do |product|
         .card 
             .product__title = link_to product.title, category_product_path(params[:category_id], id: product.slug)
-            span = product.price
+            span = number_to_currency product.price
 .btn__group
     - if user_signed_in? and (current_user.has_role? :seller or current_user.has_role? :admin) 
         = link_to 'New product', new_seller_product_path(category_ids: params[:category_id]), class: "btn btn__create"
     br
     - if user_signed_in? and current_user.has_role? :admin
+        = link_to 'Edit Category Name', edit_admin_category_path(@category), class: "btn btn__edit"
         = link_to 'Delete Category', admin_category_path(@category), method: :delete, class: "btn btn__delete"

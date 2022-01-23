@@ -1,4 +1,4 @@
-class Seller::ProductsController < ApplicationController
+class Seller::ProductsController < Seller::BaseController
     before_action :authenticate_user!, only: [:new, :create, :edit, :destroy, :update] ## require user to login 
     before_action :set_product, only: [:show, :edit, :update, :destroy ]
     def new

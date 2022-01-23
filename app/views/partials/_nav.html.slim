@@ -13,4 +13,9 @@ nav.navbar
             li.nav__item.sign-out = link_to "Sign out", destroy_user_session_path, method: :delete 
         - if user_signed_in? and current_user.has_role? :admin
             li.nav__item = link_to 'Admin Dashboard', admin_dashboard_path 
-        
+
+        li 
+            = search_form_for @q, url: search_path do |f|
+                = f.label :title_cont , "Search for a product:"
+                = f.text_field :title_cont, id: :q
+                = f.submit "Search"

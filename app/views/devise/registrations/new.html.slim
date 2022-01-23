@@ -26,10 +26,10 @@ h2 Sign up
     = f.password_field :password_confirmation, autocomplete: "new-password"
 
   .field
-    = f.label :roles 
+    = f.label :roles, "I am a:"
     br
     - Role.where.not(name: "admin").each do |role|
-      = f.radio_button :roles, role.name, id: "user_" + role.name
+      = f.radio_button :roles, role.name, id: "user_" + role.name, checked: role.name == "buyer"
       = f.label role.name
       br
 

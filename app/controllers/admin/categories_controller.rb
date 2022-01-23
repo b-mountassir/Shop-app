@@ -17,6 +17,21 @@ class Admin::CategoriesController < Admin::BaseController
         end
     end
 
+    def edit
+        authorize @category
+    end
+
+    def update
+        authorize @category
+        respond_to do |format|
+            if @category.update(category_params) and current_user.has_role? :admin
+              format.html { redirect_to category_products_url(@category), notice: "Category was successfully created." }
+            else
+              format.html { render :new, status: :unprocessable_entity }
+            end
+        end
+    end
+
     def destroy
         authorize @category
         @category.destroy

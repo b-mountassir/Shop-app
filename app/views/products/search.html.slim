@@ -1,0 +1,6 @@
+
+.cards-grid
+    - @products.each do |product|
+        .card 
+            .product__title = link_to product.title, product_path(id: product.slug)
+            span = number_to_currency product.price
