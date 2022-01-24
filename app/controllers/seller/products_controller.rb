@@ -2,12 +2,15 @@ class Seller::ProductsController < Seller::BaseController
     before_action :authenticate_user!, only: [:new, :create, :edit, :destroy, :update] ## require user to login 
     before_action :set_product, only: [:show, :edit, :update, :destroy ]
     def new
-        @product = Product.new(category_ids: params[:category_id])
+        @product = Product.new
+        @category = Category.friendly.find(params[:categories])
         authorize @product
     end
 
     def edit
         authorize @product
+        
+        @category = @product.categories.first
     end
 
     def create
@@ -15,6 +18,7 @@ class Seller::ProductsController < Seller::BaseController
         @product = Product.new(product_params)
         @product.seller = current_user
         authorize @product
+        puts params
         respond_to do |format|
             if @product.save
                 format.html { redirect_to edit_seller_product_path(@product), notice: "Product was successfully created." }
@@ -25,8 +29,9 @@ class Seller::ProductsController < Seller::BaseController
     end
 
     def update
+        params[:product][:category_ids] ||= []
         authorize @product
-
+        
         respond_to do |format|
             if @product.update(product_params)
                 format.html { redirect_to edit_seller_product_url(@product), notice: "Product was successfully updated." }
@@ -53,7 +58,7 @@ class Seller::ProductsController < Seller::BaseController
 
     
     def product_params
-        params.require(:product).permit(:title, :description, :price, :stock, :category_ids)
+        params.require(:product).permit(:title, :description, :price, :stock, category_ids: [])
     end
     
 end

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   namespace :seller do
     resources :products
   end
-  get '/search', to: 'products#search'
+  get '/search', to: 'products#index'
   resources :products
 
 end

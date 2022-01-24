@@ -15,7 +15,8 @@ nav.navbar
             li.nav__item = link_to 'Admin Dashboard', admin_dashboard_path 
 
         li 
-            = search_form_for @q, url: search_path do |f|
-                = f.label :title_cont , "Search for a product:"
-                = f.text_field :title_cont, id: :q
-                = f.submit "Search"
+            = search_form_for @q, url: products_path do |f|
+                = f.label :search , "Search for a product:"
+                = f.text_field :title_cont, id: :query
+                = f.submit "Search", id: :search
+
