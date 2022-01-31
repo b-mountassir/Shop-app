@@ -1,9 +1,10 @@
 h3.breadcrumbs 
     = link_to @category.name, category_products_path(@category)
 h1.product__title = @product.title
+h4.product__vendor = @product.seller.first_name
 span = number_to_currency @product.price
 
-.product__desc = @product.description
+.product__desc =  @product.description.to_s
 br
 - if current_user == @product.seller
     = link_to 'Edit product', edit_seller_product_path(@product)

@@ -43,7 +43,7 @@ class Seller::ProductsController < Seller::BaseController
 
     def destroy
         authorize @product
-        @product_category = ProductCategory.find_by_product_id(@product.id)
+        @product_category = ProductCategory.find_by_product_slug(@product.slug)
         @product_category.destroy
         @product.destroy
         respond_to do |format|
@@ -53,7 +53,7 @@ class Seller::ProductsController < Seller::BaseController
 
     private
     def set_product
-        @product = Product.friendly.find(params[:id])
+        @product = Product.friendly.find(params[:slug])
     end
 
     

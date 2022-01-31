@@ -26,6 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
     if resource.has_role? :buyer or resource.has_role? :seller
       resource.remove_role(current_user.roles.first.name)
+      puts Role.all
       resource.add_role(params[:user][:roles])
     end
   end

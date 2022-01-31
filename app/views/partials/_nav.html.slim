@@ -19,4 +19,6 @@ nav.navbar
                 = f.label :search , "Search for a product:"
                 = f.text_field :title_cont, id: :query
                 = f.submit "Search", id: :search
+        - if user_signed_in? and current_user.has_role? :buyer
+            li.nav__item#cart = render "cart/partials/cart"
 

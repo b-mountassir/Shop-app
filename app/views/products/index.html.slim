@@ -6,6 +6,8 @@ h1.page-title = defined?(@category) ? @category.name : "Search products"
             span = product.seller.first_name
             br
             span = number_to_currency product.price
+            - if user_signed_in? and current_user.has_role? "buyer"
+                = render "products/shared/order", product: product
 .pagination 
     = sanitize pagy_nav(@pagy) if @pagy.pages > 1
 
