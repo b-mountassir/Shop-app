@@ -44,8 +44,8 @@ class Seller::ProductsController < Seller::BaseController
 
     def destroy
         authorize @product
-        @product_category = ProductCategory.find_by_product_slug(@product.slug)
-        @product_category.destroy
+        @product_category = @product.product_categories
+        @product_category.destroy_all
         @product.destroy
         respond_to do |format|
             format.html { redirect_to root_path, notice: "Product was successfully destroyed." }
