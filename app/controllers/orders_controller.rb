@@ -1,7 +1,14 @@
 class OrdersController < ApplicationController
   
     def create
-    
+      
+      puts "MOUNTASSIR CHOUF HNA"
+      current_order.order_items.each do |order_item| 
+        product = order_item.product
+        puts order_item.product, "chof hna"
+        product.stock -= order_item.quantity
+        product.save
+      end
       if current_order.update(status: 'ordered')
         # session.delete(:order_id)
         flash[:notice] = "Order created successfully"

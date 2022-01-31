@@ -1,7 +1,9 @@
 class OrderItem < ApplicationRecord
     before_save :set_unit_price 
     before_save :set_total
-    
+
+    validates :quantity, numericality: { greater_than: 0 }
+
     belongs_to :order
     belongs_to :product
 

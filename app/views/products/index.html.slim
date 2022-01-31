@@ -2,12 +2,17 @@ h1.page-title = defined?(@category) ? @category.name : "Search products"
 .cards-grid
     - @products.each do |product|
         .card 
+            - if product.product_picture.attached?
+                image.product__img src = url_for(product.product_picture)
             .product__title = link_to product.title, defined?(@category) ? category_product_path(params[:category_id], id: product.slug) : product_path(id: product.slug)
             span = product.seller.first_name
             br
             span = number_to_currency product.price
-            - if user_signed_in? and current_user.has_role? "buyer"
+            - if product.stock > 0
                 = render "products/shared/order", product: product
+            - elsif product.stock == 0
+                br
+                | Out of stock
 .pagination 
     = sanitize pagy_nav(@pagy) if @pagy.pages > 1
 

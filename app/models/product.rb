@@ -3,7 +3,7 @@ class Product < ApplicationRecord
     friendly_id :title, use: %i(slugged history finders)
     validates_presence_of :price, :title, :stock, :categories
     has_rich_text :description
-
+    has_one_attached :product_picture
     has_many :product_categories
     has_many :categories, through: :product_categories
 

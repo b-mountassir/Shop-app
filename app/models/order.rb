@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+    before_save :set_subtotal
     
     belongs_to :user
     has_many :order_items

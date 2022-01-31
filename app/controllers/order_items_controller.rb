@@ -1,15 +1,20 @@
 class OrderItemsController < ApplicationController
   before_action :set_order
   def create
-    order_item = @order.order_items.find_by(product_id: order_params[:product_id])
-    if order_item
-      order_item.update(quantity: order_item.quantity + order_params[:quantity].to_i)
-    else
+    order_item = @order.order_items.find_by_product_id(product_id: order_params[:product_id])
+    new_quantity = order_item ? order_item.quantity + order_params[:quantity].to_i : order_params[:quantity].to_i
+    
+    product = Product.find(order_params[:product_id])
+    
+    if order_item && product.stock >= new_quantity
+      order_item.update(quantity: new_quantity)
+    
+    elsif !order_item && product.stock >= new_quantity
       @order.order_items.new(order_params)
       @order.save
-    end
-    respond_to do |format|
-        format.js
+
+    else
+        @error = "Invalid quantity"
     end
   end
 

@@ -16,6 +16,7 @@ class Seller::ProductsController < Seller::BaseController
     def create
        
         @product = Product.new(product_params)
+        @product.product_picture.attach(params[:product_picture])
         @product.seller = current_user
         authorize @product
         puts params
@@ -53,12 +54,12 @@ class Seller::ProductsController < Seller::BaseController
 
     private
     def set_product
-        @product = Product.friendly.find(params[:slug])
+        @product = Product.friendly.find(params[:id])
     end
 
     
     def product_params
-        params.require(:product).permit(:title, :description, :price, :stock, category_ids: [])
+        params.require(:product).permit(:title, :description, :price, :stock, :product_picture, category_ids: [])
     end
     
 end

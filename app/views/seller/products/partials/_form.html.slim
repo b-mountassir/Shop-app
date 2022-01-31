@@ -25,6 +25,9 @@
     = form.label :stock
     = form.number_field :stock
   .field
+    = form.label :product_picture
+    = form.file_field :product_picture
+  .field
     - Category.all.each do |category|
       = hidden_field_tag "product[category_ids][]", nil
       = check_box_tag "product[category_ids][]", category.id, @product.categories.include?(category), id: dom_id(category)
