@@ -1,5 +1,11 @@
-#cart-item = render 'cart/partials/cart_items', order_items: @order_items
+#cart-item
+   = render 'cart/partials/cart_items', order_items: @order_items
 hr
 
-h1 
-  = link_to "Confirm purchase", orders_path, method: :post, class: 'btn btn-primary'
+- if @order_items.length > 0
+  span.cart__empty
+    = form_for :order_item, url: empty_cart_path, method: :delete, remote: true do |f|
+      = f.submit "Empty cart"
+
+  h1.order__confirm
+    = link_to "Confirm purchase", orders_path, method: :post, class: 'btn btn-primary' 

@@ -1,15 +1,15 @@
 class OrderItemsController < ApplicationController
   before_action :set_order
+  before_action :set_product, only: [:create, :update]
   def create
-    order_item = @order.order_items.find_by_product_id(product_id: order_params[:product_id])
+    order_item = @order.order_items.find_by(product_id: order_params[:product_id])
+    
     new_quantity = order_item ? order_item.quantity + order_params[:quantity].to_i : order_params[:quantity].to_i
-    
-    product = Product.find(order_params[:product_id])
-    
-    if order_item && product.stock >= new_quantity
+    if order_item && set_product.stock >= new_quantity
       order_item.update(quantity: new_quantity)
+
     
-    elsif !order_item && product.stock >= new_quantity
+    elsif !order_item && set_product.stock >= new_quantity
       @order.order_items.new(order_params)
       @order.save
 
@@ -20,7 +20,12 @@ class OrderItemsController < ApplicationController
 
   def update
     @order_item = @order.order_items.find(params[:id])
-    @order_item.update(order_params)
+
+    new_quantity = @order_item.quantity + order_params[:quantity].to_i
+    if set_product.stock >= new_quantity
+      @order_item.update(order_params)
+    end
+
     @order_items = current_order.order_items
   end
 
@@ -36,6 +41,10 @@ class OrderItemsController < ApplicationController
   end
 
   private 
+
+  def set_product
+    product = Product.find(order_params[:product_id])
+  end
 
   def set_order
     @order = current_order

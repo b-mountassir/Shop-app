@@ -13,7 +13,16 @@
  *= require_tree .
  *= require_self
  */
- 
+
+body {
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 1417px;
+    margin: 0 auto;
+}
+
  ul.nav {
     list-style: none;
     display: flex;
@@ -118,6 +127,44 @@ nav{
     text-align: center;
 }
 
+.cart-heading {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+}
+
+.item-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+    padding-block: 15px;
+}
+
+form.edit_order_item {
+    display: flex;
+    justify-content: right;
+}
+
+h3.cart__total {
+    text-align: right;
+}
+
+form[action="/empty_cart"] {
+    text-align: right;
+}
+
+h1.order__confirm {
+    text-align: center;
+}
+
+a.btn.btn-primary {
+    color: black;
+    background: white;
+    border: 1px solid;
+}
+
+
+
 @media screen and (max-width:767px) {
     nav {
         display: flex;
@@ -129,4 +176,19 @@ nav{
         flex-direction: column;
         align-items: self-end;
     }
+}
+
+
+.product-page__detail {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+}
+
+img.product__image {
+    height: 458px;
+}
+
+.product-info {
+    padding-block: 5rem;
 }

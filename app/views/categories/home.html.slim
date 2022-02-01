@@ -1,18 +1,14 @@
 h1.page-title ShopApp
 
 .collection
-    h2.page-title = @category.name 
-    .collection__products.cards-grid 
-        - @products.each do |product|
-            .card 
-                h3 = link_to product.title, product_path(id: product.slug)
-                span = product.seller.first_name
-                br
-                span = number_to_currency product.price
-                span
-                  - if product.stock > 0
-                    p = product.stock
-                    = render "products/shared/order", product: product
-                  - elsif product.stock == 0
-                    br
-                    | Out of stock
+    - @categories.each do |category|
+      h2.page-title = category.name 
+      .collection__products.home-cards__grid 
+          - category.products.last(5).sort_by(&:title).each do |product|
+              .card 
+                  h3 = link_to product.title, product_path(id: product.slug)
+                  span = product.seller.first_name
+                  br
+                  span = number_to_currency product.price
+                  = render "products/shared/order", product: product
+                  

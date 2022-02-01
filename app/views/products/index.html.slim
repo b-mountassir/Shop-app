@@ -8,11 +8,7 @@ h1.page-title = defined?(@category) ? @category.name : "Search products"
             span = product.seller.first_name
             br
             span = number_to_currency product.price
-            - if product.stock > 0
-                = render "products/shared/order", product: product
-            - elsif product.stock == 0
-                br
-                | Out of stock
+            = render "products/shared/order", product: product
 .pagination 
     = sanitize pagy_nav(@pagy) if @pagy.pages > 1
 

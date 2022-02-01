@@ -20,4 +20,6 @@ Rails.application.routes.draw do
   resources :order_items, only: %i(create update destroy)
   resources :orders, only: [:create]
   get '/cart', to: 'cart#show'
+
+  delete '/empty_cart', to: 'order_items#destroy_all'
 end

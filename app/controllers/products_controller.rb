@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
     def index        
         unless params.has_key?(:q)
             @category = Category.friendly.find(params[:category_id])
-            @pagy, @products = pagy(@category.products)
+            @pagy, @products = pagy(@category.products.order(:title))
         else
             @q = Product.ransack(params[:q])
             puts params[:q]

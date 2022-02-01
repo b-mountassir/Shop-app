@@ -1,13 +1,17 @@
 // Place all the styles related to the category controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-body {
-    background:rgba(88, 79, 79, 0.4);
-}
+
 
 .cards-grid {
     display: flex;
     flex-flow: wrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.home-cards__grid {
+    display: flex;
     justify-content: space-evenly;
     align-items: flex-start;
 }

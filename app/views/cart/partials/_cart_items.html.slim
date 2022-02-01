@@ -9,10 +9,9 @@
     .item-row
       .cell = item.product.title
       .cell = item.product.price
-      .cell = item.quantity
-      /= render 'cart/partials/update_cart_item_form', item: item
+      = render 'cart/partials/update_cart_item_form', item: item
       .cell = item.total  
 
-h3 
+h3.cart__total 
   | Your current order has a total of  
   = current_order.subtotal 
