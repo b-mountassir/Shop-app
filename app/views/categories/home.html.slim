@@ -9,3 +9,10 @@ h1.page-title ShopApp
                 span = product.seller.first_name
                 br
                 span = number_to_currency product.price
+                span
+                  - if product.stock > 0
+                    p = product.stock
+                    = render "products/shared/order", product: product
+                  - elsif product.stock == 0
+                    br
+                    | Out of stock

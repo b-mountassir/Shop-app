@@ -2,6 +2,7 @@ class Product < ApplicationRecord
     extend FriendlyId
     friendly_id :title, use: %i(slugged history finders)
     validates_presence_of :price, :title, :stock, :categories
+    validates :stock, numericality: { greater_than_or_equal_to: 0 }
     has_rich_text :description
     has_one_attached :product_picture
     has_many :product_categories

@@ -9,6 +9,7 @@
     .item-row
       .cell = item.product.title
       .cell = item.product.price
+      .cell = item.quantity
       /= render 'cart/partials/update_cart_item_form', item: item
       .cell = item.total  
 
