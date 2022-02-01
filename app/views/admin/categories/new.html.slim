@@ -1,0 +1,17 @@
+= form_with(model: [:admin, @category]) do |f|
+  - if @category.errors.any?
+    #error_explanation
+      h2 = pluralize(product.errors.count, "error")
+        | prohibited this product from being saved:
+
+      ul
+        - product.errors.each do |error|
+          li = error.full_message
+  .field
+    = f.label :name
+    | :
+    br
+    = f.text_field :name
+
+  .actions
+    = f.submit

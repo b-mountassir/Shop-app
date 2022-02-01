@@ -1,0 +1,37 @@
+= form_with(model: [:seller, product]) do |form|
+  - if product.errors.any?
+    #error_explanation
+    h2 = pluralize(product.errors.count, "error")
+      | prohibited this product from being saved:
+
+      ul
+        - @product.errors.each do |error|
+          li = error.full_message
+
+
+  .field 
+    = form.label :title
+    = form.text_field :title
+
+  .field
+    = form.label :description
+    = form.rich_text_area :description
+
+  .field
+    = form.label :price
+    = form.text_field :price
+    
+  .field
+    = form.label :stock
+    = form.number_field :stock
+  .field
+    = form.label :product_picture
+    = form.file_field :product_picture
+  .field
+    - Category.all.each do |category|
+      = hidden_field_tag "product[category_ids][]", nil
+      = check_box_tag "product[category_ids][]", category.id, @product.categories.include?(category), id: dom_id(category)
+      = label_tag dom_id(category), category.name 
+      br
+  .actions
+    = form.submit

@@ -1,0 +1,11 @@
+h1.page-title ShopApp
+
+.collection
+    h2.page-title = @category.name 
+    .collection__products.cards-grid 
+        - @products.each do |product|
+            .card 
+                h3 = link_to product.title, product_path(id: product.slug)
+                span = product.seller.first_name
+                br
+                span = number_to_currency product.price

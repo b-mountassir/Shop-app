@@ -4,3 +4,21 @@ nav.navbar
             = link_to "Home", root_path
         li 
             = link_to "Categories", categories_path
+        - unless user_signed_in?
+            li.nav__item.sign-in = link_to "Sign in", new_user_session_path
+            li.nav__item.sign-up = link_to "Sign up", new_user_registration_path
+        - else
+            li.nav__item.user-email = current_user.email 
+            li.nav__item.edit = link_to "Profile", edit_user_registration_path
+            li.nav__item.sign-out = link_to "Sign out", destroy_user_session_path, method: :delete 
+        - if user_signed_in? and current_user.has_role? :admin
+            li.nav__item = link_to 'Admin Dashboard', admin_dashboard_path 
+
+        li 
+            = search_form_for @q, url: products_path do |f|
+                = f.label :search , "Search for a product:"
+                = f.text_field :title_cont, id: :query
+                = f.submit "Search", id: :search
+        - if user_signed_in? and current_user.has_role? :buyer
+            li.nav__item#cart = render "cart/partials/cart"
+

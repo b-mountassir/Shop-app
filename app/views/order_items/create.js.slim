@@ -1,0 +1,8 @@
+- if !@error
+    | $("#cart").html(" 
+    = j render('cart/partials/cart')
+    |");
+- else
+    | $(".alert").html("
+    = @error
+    |");

@@ -1,0 +1,5 @@
+#cart-item = render 'cart/partials/cart_items', order_items: @order_items
+hr
+
+h1 
+  = link_to "Confirm purchase", orders_path, method: :post, class: 'btn btn-primary'

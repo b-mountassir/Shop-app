@@ -65,6 +65,7 @@ gem 'friendly_id', '~> 5.4.0'
 gem 'pagy', '~> 5.6'
 gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'slim-rails'
+gem 'haml-rails'
 
 gem "pundit"
 
