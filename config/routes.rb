@@ -21,5 +21,7 @@ Rails.application.routes.draw do
   resources :orders, only: [:create]
   get '/cart', to: 'cart#show'
 
+  get '/users', to: 'profile#show'
+
   delete '/empty_cart', to: 'order_items#destroy_all'
 end

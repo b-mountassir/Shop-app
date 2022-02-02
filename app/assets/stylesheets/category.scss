@@ -39,3 +39,25 @@ input#order_item_quantity {
 .product__img {
     max-width: 200px;
 }
+
+.login_page {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+a.login-field__signup.btn {
+    background: lightcyan;
+    color: black;
+}
+
+.actions {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+input.btn.login-field__btn {
+    background: lightgrey;
+    border: 1px solid black;
+}

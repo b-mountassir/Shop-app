@@ -2,7 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+  before_action :configure_account_update_params, only: [:update]
   
 
   # GET /resource/sign_up
@@ -25,12 +25,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     super
     if resource.has_role? :buyer or resource.has_role? :seller
-      resource.remove_role(current_user.roles.first.name)
-      puts Role.all
-      resource.add_role(params[:user][:roles])
+      resource.update(roles: [Role.find_by(name: params[:user][:roles])])
     end
   end
-
+  
   # DELETE /resource
   # def destroy
   #   super
@@ -71,4 +69,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [roles: []])
   end
+  
+  def configure_account_update_params
+    params.require(:user).permit([roles: []], :first_name, :last_name, :profile_picture)
+  end
+  
 end
