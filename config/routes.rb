@@ -24,4 +24,6 @@ Rails.application.routes.draw do
   get '/users', to: 'profile#show'
 
   delete '/empty_cart', to: 'order_items#destroy_all'
+
+  resources :reviews, only: %i(create update destroy)
 end

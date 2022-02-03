@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :products, foreign_key: :seller_id
   has_one_attached :profile_picture
+  has_many :reviews, foreign_key: :reviewer_id
   rolify
   before_create :set_default_role
   validates :email, uniqueness: true

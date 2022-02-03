@@ -15,6 +15,14 @@ class ProductsController < ApplicationController
         unless defined?(@product)
             @product = @category.products.find(params[:id])
         end
+        
+        @new_review = @product.reviews.new
+        
+        @review_count = @product.reviews.count
+        if @review_count > 0
+            @reviews = @product.reviews
+            @average_rating = (@product.reviews.collect { |review|  review.rating.to_i }.sum)/@review_count if @review_count > 0
+        end
     end
     
 
@@ -28,4 +36,6 @@ class ProductsController < ApplicationController
             @category = @product.categories.first
         end
     end
+
+
 end

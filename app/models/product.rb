@@ -7,6 +7,7 @@ class Product < ApplicationRecord
     has_one_attached :product_picture
     has_many :product_categories
     has_many :categories, through: :product_categories
+    has_many :reviews
 
     belongs_to :seller, class_name: 'User'
 

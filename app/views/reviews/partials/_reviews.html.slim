@@ -1,0 +1,10 @@
+- @product.reviews.all.each do |review|
+
+    br
+    .review-items__item
+        .reviewer_name 
+            h4 = review.reviewer.first_name
+        .review_rating 
+            = render 'reviews/partials/stars', reviews: review.rating
+        strong.review_title = review.title 
+        .review_content = review.body
