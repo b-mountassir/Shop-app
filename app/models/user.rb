@@ -3,6 +3,8 @@ class User < ApplicationRecord
   has_one_attached :profile_picture
   has_many :reviews, foreign_key: :reviewer_id
   rolify
+  has_many :orders
+  has_many :order_items
   before_create :set_default_role
   validates :email, uniqueness: true
   validates :username, presence: true, uniqueness: { case_sensitive: false }
@@ -11,7 +13,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-
+ 
   attr_writer :login
 
   def login

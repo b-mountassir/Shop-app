@@ -8,7 +8,9 @@ h1.page-title ShopApp
               .card 
                   h3 = link_to product.title, product_path(id: product.slug)
                   span = product.seller.first_name
-                  br
+                  = render 'reviews/partials/stars',
+                   product_reviews_count: product.reviews.count,
+                   reviews: product.reviews.collect { |review| review.rating }.sum / product.reviews.count.to_f
                   span = number_to_currency product.price
                   = render "products/shared/order", product: product
                   

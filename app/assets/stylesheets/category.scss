@@ -159,3 +159,16 @@ p.star--half:before {
 .product-page__reviews .reviews-header {
     padding-inline: 1rem;
 }
+
+.review-title__field input {
+    width: 97.8%;
+}
+
+textarea#review_body {
+    width: 98%;
+    height: 90px;
+}
+
+p.star {
+    padding: 0 4px 0 0 !important;
+}

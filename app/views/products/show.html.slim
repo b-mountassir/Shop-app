@@ -7,12 +7,7 @@
     .product-page__detail
         .product-info
             h1.product__title = @product.title
-            .preview-badge
-                = render 'reviews/partials/stars', reviews: @average_rating
-                span.average_rating 
-                    |  
-                    = @review_count
-                    |  reviews 
+            = render 'reviews/partials/stars', reviews: @average_rating, review_count: @review_count
 
 
             h4.product__vendor = @product.seller.first_name
@@ -27,19 +22,7 @@
         .product-media                
             - if @product.product_picture.attached?
                 image.product__image src = url_for(@product.product_picture)
-
-    .product-page__reviews 
-        .reviews-header
-            h1 Customer reviews
-            .preview-badge
-                = render 'reviews/partials/stars', reviews: @average_rating
-                span.average_rating 
-                    |  
-                    = @review_count
-                    |  reviews 
-
-            .review-form = render "reviews/partials/form", new_review: @new_review
-        p.notice = notice
-        p.alert = alert 
-        .review-items = render "reviews/partials/reviews", reviews: @reviews
+    = render "reviews/partials/review_widget", reviews: @reviews, average_rating: @average_rating, review_count: @review_count, new_review: @new_review
+    
+    
             

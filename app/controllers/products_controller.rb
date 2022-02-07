@@ -15,13 +15,17 @@ class ProductsController < ApplicationController
         unless defined?(@product)
             @product = @category.products.find(params[:id])
         end
-        
-        @new_review = @product.reviews.new
+        # check wheter user is alowwed to review    
+        order_item = current_user.order_items.find_by(product: @product, reviewed_at: nil)
+        @new_review = nil
+        if !order_item.nil?
+            @new_review = @product.reviews.new(order_item_id: order_item.id)
+        end
         
         @review_count = @product.reviews.count
         if @review_count > 0
-            @reviews = @product.reviews
-            @average_rating = (@product.reviews.collect { |review|  review.rating.to_i }.sum)/@review_count if @review_count > 0
+            @pagy, @reviews = pagy(@product.reviews.order("created_at DESC"), items: 5)
+            @average_rating = (@product.reviews.collect { |review|  review.rating.to_i }.sum)/@review_count.to_f if @review_count > 0
         end
     end
     

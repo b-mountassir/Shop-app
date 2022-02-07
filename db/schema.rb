@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_03_143134) do
+ActiveRecord::Schema.define(version: 2022_02_07_145813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,8 +80,11 @@ ActiveRecord::Schema.define(version: 2022_02_03_143134) do
     t.decimal "unit_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.datetime "reviewed_at"
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_id"], name: "index_order_items_on_product_id"
+    t.index ["user_id"], name: "index_order_items_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -124,6 +127,8 @@ ActiveRecord::Schema.define(version: 2022_02_03_143134) do
     t.bigint "reviewer_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "order_item_id"
+    t.index ["order_item_id"], name: "index_reviews_on_order_item_id"
     t.index ["product_id"], name: "index_reviews_on_product_id"
     t.index ["reviewer_id"], name: "index_reviews_on_reviewer_id"
   end

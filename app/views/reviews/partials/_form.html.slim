@@ -2,18 +2,20 @@
     .field
         .review-title = f.label :title
         .review-title__field = f.text_field :title
-    .field
-        .review-body = f.label :body
-        .review-body__field = f.text_field :body
-    br
+        
     span.star-field 
+        | Rating:
+        br
         - (1..5).each do |r|
             span.star 
                 a = f.label dom_id(Review.new, r), :" ", class: "star star--on"
                 a.hidden = f.radio_button :rating, r, id: "review_" + dom_id(Review.new, r), checked: r == 5, class:"star-rating"
-        = f.hidden_field  :product_id, value: @product.id
-        
-        = f.hidden_field  :reviewer_id, value: current_user.id
+        = f.hidden_field :order_item_id, value: new_review.order_item_id
+    br
+
+    .field
+        .review-body = f.label :body
+        .review-body__field = f.text_area :body
     br
     .field 
         = f.submit :create, value: "Submit"

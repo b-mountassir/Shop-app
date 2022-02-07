@@ -10,7 +10,7 @@ class OrderItemsController < ApplicationController
 
     
     elsif !order_item && set_product.stock >= new_quantity
-      @order.order_items.new(order_params)
+      @order.order_items.new({user_id: current_user.id }.merge(order_params))
       @order.save
 
     else

@@ -7,12 +7,10 @@ h1.page-title = defined?(@category) ? @category.name : "Search products"
             .product__title = link_to product.title, defined?(@category) ? category_product_path(params[:category_id], id: product.slug) : product_path(id: product.slug)
             span = product.seller.first_name
             br
-            span.preview-badge
-                = render 'reviews/partials/stars', reviews: product.reviews.count
-                span.average_rating 
-                    |  
-                    = product.reviews.count
-                    |  reviews 
+            - if product.reviews.count > 0
+                = render 'reviews/partials/stars',
+                 product_reviews_count: product.reviews.count,
+                 reviews: product.reviews.collect { |review| review.rating }.sum / product.reviews.count.to_f
             br
             span = number_to_currency product.price
             = render "products/shared/order", product: product
