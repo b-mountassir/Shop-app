@@ -1,0 +1,22 @@
+.order-line__items {
+    display: grid;
+    width: 100%;
+    justify-content: space-between;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.product_title {
+    grid-column: 2/3;
+}
+
+h1.order__confirm {
+    text-align: center;
+}
+
+.table-headers {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: space-between;
+    gap: 1rem;
+}

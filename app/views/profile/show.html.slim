@@ -5,4 +5,7 @@ br
 - if @user.profile_picture.attached?
     image src= url_for(@user.profile_picture)
 br
-= link_to "Edit profile", edit_user_registration_path
+
+    hr
+
+.edit_profile = link_to "Edit profile", edit_user_registration_path

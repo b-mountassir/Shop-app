@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations'}
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
@@ -18,7 +20,7 @@ Rails.application.routes.draw do
   resources :products
 
   resources :order_items, only: %i(create update destroy)
-  resources :orders, only: [:create]
+  resources :orders, only: %i(create show index)
   get '/cart', to: 'cart#show'
 
   get '/users', to: 'profile#show'
@@ -26,4 +28,10 @@ Rails.application.routes.draw do
   delete '/empty_cart', to: 'order_items#destroy_all'
 
   resources :reviews, only: %i(create update destroy)
+
+  get '/reviews', to: 'reviews#new'
+
+  mount Sidekiq::Web => '/sidekiq'
+
+
 end

@@ -8,6 +8,9 @@
         - product.errors.each do |error|
           li = error.full_message
   .field
+    = f.label :category_picture
+    = f.file_field :category_picture
+  .field
     = f.label :name
     | :
     br

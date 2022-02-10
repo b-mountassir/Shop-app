@@ -1,0 +1,25 @@
+span.page.disabled {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+.pagination .page {
+    position: relative;
+    display: block;
+    margin-left: -1px;
+    padding: 0.5rem 0.75rem;
+    line-height: 1.25;
+    color: #D19C97;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
+
+.pagination>span {}
+
+span.page.active {
+    background: #da9c97;
+    color: white;
+}

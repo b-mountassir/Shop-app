@@ -1,24 +1,51 @@
-nav.navbar 
-    ul.nav
-        li.nav__item 
-            = link_to "Home", root_path
-        li 
-            = link_to "Categories", categories_path
-        - unless user_signed_in?
-            li.nav__item.sign-in = link_to "Sign in", new_user_session_path
-            li.nav__item.sign-up = link_to "Sign up", new_user_registration_path
-        - else
-            li.nav__item.user-email = current_user.email 
-            li.nav__item.edit = link_to "Profile", users_path
-            li.nav__item.sign-out = link_to "Sign out", destroy_user_session_path, method: :delete 
-        - if user_signed_in? and current_user.has_role? :admin
-            li.nav__item = link_to 'Admin Dashboard', admin_dashboard_path 
-
-        li 
+.container-fluid   
+    .row.align-items-center.py-3.px-xl-5
+        .col-lg-3.d-none.d-lg-block
+            a.text-decoration-none href = root_url
+                h1.m-0.display-5.font-weight-semi-bold
+                    span.text-primary.font-weight-bold.border.px-3.mr-1 Shop 
+                    | App
+        .col-lg-6.col-6.text-left
             = search_form_for @q, url: products_path do |f|
-                = f.label :search , "Search for a product:"
-                = f.text_field :title_cont, id: :query
-                = f.submit "Search", id: :search
-        - if user_signed_in? and current_user.has_role? :buyer
-            li.nav__item#cart = render "cart/partials/cart"
+                .input-group
+                    = f.text_field :title_cont, id: :query, class: "form-control", placeholder: "Search for a product"
+                    .input-group-append
+                        .input-group-text.bg-transparent.text-primary
+                            = f.button :submit, id: :search, class:"search-btn"
+                                i.fa.fa-magnifying-glass
+        .col-lg-3.col-6.text-right
+            .btn.border
+                = link_to cart_path do
+                    i.fa.fa-shopping-cart.text-primary
+                    - if user_signed_in? and current_user.has_role? :buyer
+                        #cart = render "cart/partials/cart"
+.container-fluid.mb-2            
+    .row.border-top.px-xl-5    
+        .col-lg-3.d-none.d-lg-block
+        .col-lg-9
+            nav.navbar.navbar-expand-lg.bg-light.navbar-light.py-3.py-lg-0.px-0 
+                a.text-decoration-none.d-block.d-lg-none href = root_path
+                    h1.m-0.display-5.font-weight-semi-bold
+                        span.text-primary.font-weight-bold.border.px-3.mr-1 Shop 
+                        | App
+                button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarCollapse" aria-expanded="false"
+                    span.navbar-toggler-icon
+                .collapse.navbar-collapse.justify-content-between#navbarCollapse
+                    .navbar-nav.mr-auto.py-0
+                        = link_to "Home", root_path, class: "nav-item nav-link"
+                        = link_to "Categories", categories_path, class: "nav-item nav-link"
+                    .navbar-nav.m1-auto.py-0
+                        - unless user_signed_in?
+                            = link_to "Sign in", new_user_session_path, class: "nav-item nav-link"
+                            = link_to "Sign up", new_user_registration_path, class: "nav-item nav-link"
+                        - else
+                            .nav-item.dropdown 
+                                | Logged in as: 
+                                a.nav-link.dropdown-toggle href="#" data-toggle="dropdown" aria-expanded="false" = current_user.email
+                                .dropdown-menu.rounded-0.m-0 
+                                    = link_to "Profile", users_path, class: "dropdown-item"
+                                    = link_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item" 
+                                    - if user_signed_in? and current_user.has_role? :admin
+                                        = link_to 'Admin Dashboard', admin_dashboard_path, class: "dropdown-item" 
+                            
 

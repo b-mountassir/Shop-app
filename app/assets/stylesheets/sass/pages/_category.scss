@@ -1,0 +1,20 @@
+.product__img {
+    max-width: 200px;
+}
+
+.cards-grid {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.home-cards__grid {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.collection {
+    margin-block: 50px;
+}

@@ -1,4 +1,14 @@
 h1.page-title Categories
-.cards-grid
-    - @categories.each do |category|
-        .card = link_to category.name, category_products_path(category.slug)
+.container-fluid.pt-5
+    .row.px-xl-5.pb-3
+        - @categories.each do |category|
+            .col-lg-4.col-md-6.pb-1 
+                .cat-item.d-flex.flex-column.border.mb-4
+                    = link_to category_products_path(category.slug) do
+                        - if category.category_picture.attached?
+                            .cat-img.position-relative.overflow-hidden.mb-3
+                                image.img-fluid src = url_for(category.category_picture)
+                            h5.font-weight-semi-bold.m-0.p-1 = category.name
+                        -else
+                            h5.font-weight-semi-bold.m-0 = category.name
+                    

@@ -1,17 +1,49 @@
+.container-fluid.pt-5
+  .row.px-xl-5
+    .col-lg-8.mb-5
+      .cart-heading.bg-secondary.text-dark.p-3
+        strong.cell Name
+        strong.cell Price
+        strong.cell Quantity
+        strong.cell Total
+        strong.cell Remove
+      .cart-items.align-middle
+        - order_items.each do |item|
+          .item-row.p-3
+            .cell.align-middle = item.product.title
+            .cell.align-middle = item.product.price
+            .cell.align-middle = item.total  
+            = render 'cart/partials/update_cart_item_form', item: item, class: "align-middle"
+            = link_to "Remove items", item, method: :delete, remote: true, class: "align-middle"
+      - if @order_items.length > 0
+        span.cart__empty
+          = form_for :order_item, url: empty_cart_path, method: :delete, remote: true do |f|
+            = f.submit "Empty cart"
+    
+    
+    .col-lg-4 
+      .card.border-secondary.mb-5
+        .card-header.bg-secondary.border-0
+            h4.font-weight-semi-bold.m-0 Cart Summary
+        
+        .card-body
+            .d-flex.justify-content-between.mb-3.pt-1
+                h6.font-weight-medium Subtotal
+                h6.font-weight-medium = current_order.subtotal
+            
+            .d-flex.justify-content-between
+                h6.font-weight-medium Shipping
+                h6.font-weight-medium $0
+            
+        
+        .card-footer.border-secondary.bg-transparent
+            .d-flex.justify-content-between.mt-2
+                h5.font-weight-bold Total
+                h5.font-weight-bold = current_order.subtotal
+            - if order_items.length > 0
+              = link_to "Proceed to checkout", orders_path, method: :post, class: 'btn btn-block btn-primary my-3 py-3 order__confirm'
+    
 
-.cart-heading
-  .cell Name
-  .cell Price
-  .cell Quantity
-  .cell Total
-.cart-items 
-  - order_items.each do |item|
-    .item-row
-      .cell = item.product.title
-      .cell = item.product.price
-      = render 'cart/partials/update_cart_item_form', item: item
-      .cell = item.total  
-
-h3.cart__total 
-  | Your current order has a total of  
-  = current_order.subtotal 
+        
+                    
+                

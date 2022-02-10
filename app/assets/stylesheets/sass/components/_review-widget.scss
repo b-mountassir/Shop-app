@@ -1,0 +1,34 @@
+.review-items__item {
+    padding: 1rem;
+}
+
+.product-page__reviews {
+    padding: 5px;
+    border: 1px solid lightgray;
+}
+
+.review-items__item {
+    border: 1px solid lightgray;
+}
+
+.review-form {
+    padding: 1rem;
+    border: 1px solid lightgray;
+}
+
+.product-page__reviews {
+    margin-block: 3rem;
+}
+
+.product-page__reviews .reviews-header {
+    padding-inline: 1rem;
+}
+
+.review-title__field input {
+    width: 97.8%;
+}
+
+textarea#review_body {
+    width: 98%;
+    height: 90px;
+}

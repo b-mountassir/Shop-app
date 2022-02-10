@@ -1,13 +1,16 @@
-span
-    - if product.stock > 0
-        p 
-            | Available: 
-            = product.stock
-        span
-            = form_for :order_item, url: order_items_path, remote: true do |f|
-                = f.hidden_field  :product_id, value: product.id
-                = f.number_field  :quantity, value:  1
-                = f.submit "Add product to cart"
-    - elsif product.stock == 0
-        br
-        | Out of stock
+- if user_signed_in?
+    span
+        - if product.stock > 0
+            span 
+                | Available: 
+                = product.stock
+                = form_for :order_item, url: order_items_path, remote: true do |f|
+                    .d-flex.align-items-center.mb-4.pt-2
+                        = f.hidden_field  :product_id, value: product.id
+                        = f.number_field  :quantity, value:  1, class: "form-control bg-secondary text-center"
+                        = f.button :submit, value:"Add product to cart", class: "btn btn-primary px-3" do 
+                            i.fa.fa-shopping-cart.mr-1
+                            | Add product to cart
+        - elsif product.stock == 0
+            br
+            | Out of stock

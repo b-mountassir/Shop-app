@@ -1,0 +1,22 @@
+html
+  head
+    meta content='text/html; charset=UTF-8' http-equiv='Content-Type' 
+
+  body
+    h2
+      | Dear 
+      = @order.user.first_name
+      |  
+      = @order.user.last_name
+    p
+      | You have recently purchased the following items from our Shop:
+
+    ul
+      - @order.order_items.each do |item| 
+        - if item.product.product_picture.attached?
+          li
+            image.product__img src = rails_storage_proxy_url(item.product.product_picture) 
+        li = "Quantity: #{item.quantity} x Item: #{item.product.title}"
+        li = link_to "Review now!", product_url(item.product)
+    h5
+      = link_to "See your order detail here", order_url(@order)

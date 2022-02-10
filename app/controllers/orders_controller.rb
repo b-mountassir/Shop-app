@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  
+    before_action :authenticate_user!
     def create
       # # take snapshot
       # current_order.order_items.each do |order_item|
@@ -18,15 +18,18 @@ class OrdersController < ApplicationController
           end
         rescue ActiveRecord::RecordInvalid => err
           flash[:notice] = "Invalid stock, check your cart again"
-          puts "BILALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL", err
           error = err
           raise ActiveRecord::Rollback
         end
       end
 
       redirect_to cart_path and return  if error != nil
-
+      order = current_order
       if current_order.update(status: 'ordered')
+        
+        OrderMailer.with(order: order).order_confirmation_email.deliver_later
+        
+        # EmailingJob.perform_later(order)
         # session.delete(:order_id)
         flash[:notice] = "Order created successfully"
         redirect_to categories_path
@@ -36,6 +39,11 @@ class OrdersController < ApplicationController
       end
     end
     
+    def index
+      @orders = Order.closed_orders.where(user_id: current_user.id)
+    end
+    
+
     def show
         @order = Order.find(params[:id])
         redirect_to root_path and return if @order.user != current_user

@@ -1,0 +1,13 @@
+.product-page__detail {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+}
+
+img.product__image {
+    height: 458px;
+}
+
+.product-info {
+    padding-block: 5rem;
+}

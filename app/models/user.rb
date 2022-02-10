@@ -1,9 +1,9 @@
 class User < ApplicationRecord
   has_many :products, foreign_key: :seller_id
   has_one_attached :profile_picture
-  has_many :reviews, foreign_key: :reviewer_id
+  has_many :reviews, foreign_key: :reviewer_id, dependent: :delete_all
   rolify
-  has_many :orders
+  has_many :orders, dependent: :delete_all
   has_many :order_items
   before_create :set_default_role
   validates :email, uniqueness: true
@@ -11,7 +11,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
 
  
   attr_writer :login
@@ -19,6 +19,7 @@ class User < ApplicationRecord
   def login
     @login || self.username || self.email
   end
+
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if (login = conditions.delete(:login))

@@ -1,1 +1,2 @@
-= link_to "Cart (#{current_order.count_subitems} items with total: $#{current_order.subtotal})", cart_path
+span.badge.btn
+    = current_order.count_subitems

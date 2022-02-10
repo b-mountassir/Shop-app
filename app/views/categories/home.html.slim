@@ -5,12 +5,21 @@ h1.page-title ShopApp
       h2.page-title = category.name 
       .collection__products.home-cards__grid 
           - category.products.last(5).sort_by(&:title).each do |product|
-              .card 
-                  h3 = link_to product.title, product_path(id: product.slug)
-                  span = product.seller.first_name
-                  = render 'reviews/partials/stars',
-                   product_reviews_count: product.reviews.count,
-                   reviews: product.reviews.collect { |review| review.rating }.sum / product.reviews.count.to_f
-                  span = number_to_currency product.price
-                  = render "products/shared/order", product: product
-                  
+              .col-lg-2.col-md-6.col-sm-12.pb-1
+                .card.product-item.border-0.mb-4
+                    = link_to defined?(@category) ? category_product_path(params[:category_id], id: product.slug) : product_path(id: product.slug) do
+                        .card-header.product-img.position-relative.overflow-hidden.bg-transparent.border.p-0
+                            - if product.product_picture.attached?
+                                image.img-fluid.w-100.p-4 src = url_for(product.product_picture)
+                        .card-body.border-left.border-right.text-center.p-0.pt-2.pb-1
+                            = product.title
+                            .vendor-name = product.seller.first_name
+                            br
+                            - if product.reviews.count > 0
+                                = render 'reviews/partials/stars',
+                                product_reviews_count: product.reviews.count,
+                                reviews: product.reviews.collect { |review| review.rating }.sum / product.reviews.count.to_f
+                            .d-flex.justify-content-center.product-price
+                                    = number_to_currency product.price
+                    .card-footer.d-flex.justify-content-between.bg-light.border
+                        = render "products/shared/order", product: product
