@@ -7,10 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.create(email: "mb.bouyebla@gmail.com", password: "gagafour2!")
 User.find(1).add_role :admin
+Role.create(name: 'buyer')
+Role.create(name: 'seller')
 require 'faker'
 
 20.times do 
-    Category.create(name: Faker::Commerce.department)
+    Category.create(name: Faker::Commerce.unique.department(max: 1, fixed_amount: true))
 end
 
 
@@ -32,7 +34,8 @@ PRODUCTS_COUNT.times do
 
   product = Product.new(
     title: title,
-    price: Faker::Commerce.price
+    stock: 20,
+    price: Faker::Commerce.price,
   )
 
   num_categories = 1 + rand(MAX_CATEGORIES)

@@ -1,0 +1,10 @@
+| $('#cart').html("
+= j render 'cart/partials/cart'
+|");
+| $("#cart-item").html("
+= j render 'cart/partials/cart_items', order_items: @order_items 
+|");
+
+- if @order_items.length == 0
+    | $(".order__confirm").remove();
+    | $(".cart__empty").remove();

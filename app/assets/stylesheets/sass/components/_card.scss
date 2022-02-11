@@ -1,0 +1,22 @@
+.btn {
+    padding: 10px;
+    border-radius: 15px;
+    display: inline-block;
+}
+
+.btn__create {
+    background: $green;
+    color: $white !important;
+}
+
+.btn__delete {
+    background: $red;
+    color: $white;
+}
+
+.btn__group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}

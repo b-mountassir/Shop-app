@@ -5,7 +5,7 @@ Rails.application.configure do
 
   # Code is not reloaded between requests.
   config.cache_classes = true
-
+  config.action_mailer.default_url_options = { host: ENV['SERVER_DOMAIN'], protocol: 'https://' }
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
@@ -63,6 +63,15 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "ShopApp_production"
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    port: 587,
+    address: ENV['SES_SERVER'],
+    user_name: ENV['SES_USERNAME'],
+    password: ENV['SES_PASSWORD'],
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

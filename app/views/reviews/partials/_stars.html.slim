@@ -1,0 +1,19 @@
+.preview-badge
+    - if reviews 
+        - (1..5).each do |r|
+            - if reviews >= r and (reviews - (r-1)) > 0.7
+                p.star.star--on 
+            - elsif ((reviews - (r-1)) <= 0.7 and (reviews - (r-1)) > 0)  
+                p.star.star--half
+            - else 
+                p.star.star--off
+    span.average_rating 
+        |
+        - if defined?(product_reviews_count) 
+            = product_reviews_count
+            |  reviews 
+        - elsif defined?(dummy_variable) and defined?(reviews)
+            |   
+        - elsif defined?(review_count) 
+            = @review_count
+            |  reviews 

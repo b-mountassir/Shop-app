@@ -1,0 +1,12 @@
+
+| $("#
+= @order_item.product.slug
+|").html('
+.review-items__item
+    .review_timestamp 
+        = @review.created_at.strftime("%Y/%m/%d at %H:%M")
+    .review_rating 
+        = j render "reviews/partials/stars", reviews: params[:review][:rating].to_i, dummy_variable: @review
+    strong.review_title = @review.title 
+    .review_content = @review.body 
+|')

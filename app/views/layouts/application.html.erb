@@ -13,12 +13,18 @@
   <body>
     <%= render "partials/nav"%>
     
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    
+    <div class="container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
+      <%= yield %>
     <footer>
     </footer>
-  
+    <%= javascript_pack_tag 'main' %>
     <%= javascript_pack_tag 'search' %>
+    <%= javascript_pack_tag 'starRating' %>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

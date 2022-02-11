@@ -1,0 +1,10 @@
+.modal-header
+    button type="button" class="close" data-dismiss="modal" x
+    h4.modal-title#myModalLabel New Review 
+
+.modal-body
+    = render 'reviews/partials/form', new_review: Review.new(order_item_id: params[:id])
+
+.modal-footer
+    button.btn.btn-primary Save
+

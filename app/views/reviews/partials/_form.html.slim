@@ -1,0 +1,20 @@
+= form_for new_review, remote: true do |f|
+    .field
+        .review-title = f.label :title
+        .review-title__field = f.text_field :title
+
+    .field 
+        = f.label :rating   
+    span.star-field 
+        - (1..5).each do |r|
+            = f.label dom_id(defined?(@order_item) ? @order_item : item, r), :" ", class: "star star--on"
+            a.hidden = f.radio_button :rating, r, id: "review_" + dom_id(defined?(@order_item) ? @order_item : item, r), checked: r == 5, class:"star-rating"
+    br
+    = f.hidden_field :order_item_id, value: new_review.order_item_id
+
+    .field
+        .review-body = f.label :body
+        .review-body__field = f.text_area :body
+    br
+    .field 
+        = f.submit :create, value: "Submit"

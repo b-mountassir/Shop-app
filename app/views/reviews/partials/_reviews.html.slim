@@ -1,0 +1,16 @@
+- reviews.each do |review|
+
+    br
+    .review-items__item
+        .reviewer_name 
+            h4 = review.reviewer.first_name
+        .review_timestamp 
+            = review.created_at.strftime("%Y/%m/%d at %H:%M")
+        .review_rating 
+            = render 'reviews/partials/stars', reviews: review.rating, dummy_variable: @reviews.count
+        strong.review_title = review.title 
+        .review_content = review.body
+
+    br 
+.pagination 
+    = sanitize pagy_nav(@pagy) if @pagy.pages > 1

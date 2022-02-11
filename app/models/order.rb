@@ -5,6 +5,7 @@ class Order < ApplicationRecord
     has_many :order_items
 
     enum status: { cart: 0, ordered: 1, paid: 2}
+    scope :closed_orders, -> { where(status: 'ordered') }
     def subtotal
         order_items.collect { |order_item| order_item.valid? ? order_item.unit_price * order_item.quantity : 0 }.sum
     end

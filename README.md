@@ -63,3 +63,5 @@ The following requirements are written base on the Behavior-Driven Stories. UI i
     - An email to reminder buyer to leave review for products which he bought and yet left review (after 1 day of the purchase time).
     - Reminder email should be sent only once / as many time as seller sets
 
+
+not allow user to send request to create review if not allowed

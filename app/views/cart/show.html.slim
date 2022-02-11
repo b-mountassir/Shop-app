@@ -1,5 +1,9 @@
-#cart-item = render 'cart/partials/cart_items', order_items: @order_items
+.container-fluid.bg-secondary.mb-5
+  .d-flex.flex-column.align-items-center.justify-content-center style="min-height: 300px"
+    h1.font-weight-semi-bold.text-uppercase.mb-3 Shopping Cart
+
+#cart-item
+   = render 'cart/partials/cart_items', order_items: @order_items
 hr
 
-h1 
-  = link_to "Confirm purchase", orders_path, method: :post, class: 'btn btn-primary'
+

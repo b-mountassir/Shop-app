@@ -7,6 +7,7 @@ class Admin::CategoriesController < Admin::BaseController
     end
     def create
         @category = Category.new(category_params)
+        @category.category_picture.attach(params[:category_picture])
         authorize @category
         respond_to do |format|
             if @category.save and current_user.has_role? :admin
@@ -45,6 +46,6 @@ class Admin::CategoriesController < Admin::BaseController
         @category = Category.friendly.find(params[:id])
     end
     def category_params
-        params.require(:category).permit(:name)
+        params.require(:category).permit(:name, :category_picture)
     end
 end

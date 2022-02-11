@@ -1,0 +1,34 @@
+input#order_item_quantity {
+    width: 23%;
+    text-align: center;
+}
+
+.cart-heading {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    text-align: center;
+}
+
+.item-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    text-align: center;
+    padding-block: 15px;
+}
+
+form.edit_order_item {
+    display: flex;
+    justify-content: right;
+}
+
+form[action="/empty_cart"] {
+    text-align: center;
+}
+
+a.btn-primary {
+    background-color: #D19C97 !important;
+}
+
+div#cart {
+    float: right;
+}

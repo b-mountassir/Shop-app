@@ -55,6 +55,7 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'jwt'
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
@@ -74,6 +75,11 @@ gem "omniauth-rails_csrf_protection"
 
 gem 'aws-sdk-s3'
 
+gem 'sidekiq'
+gem 'sidekiq-scheduler'
+
 gem 'image_processing', '~> 1.2'
 
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+
+gem "font-awesome-rails"

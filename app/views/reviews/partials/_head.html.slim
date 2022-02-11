@@ -1,0 +1,15 @@
+.preview-badge
+    - if average_rating 
+        - (1..5).each do |r|
+            - if average_rating >= r and (average_rating - (r-1)) > 0.7
+                p.star.star--on 
+            - elsif ((average_rating - (r-1)) <= 0.7 and (average_rating - (r-1)) > 0)  
+                p.star.star--half
+            - else 
+                p.star.star--off
+    span.average_rating 
+        - if reviews
+            = average_rating.round 2
+            |  average rating based on 
+            = review_count
+            |  reviews 
