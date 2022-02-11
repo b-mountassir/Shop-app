@@ -17,7 +17,7 @@ h1.page-title = defined?(@category) ? @category.name : "Search products"
                             reviews: product.reviews.collect { |review| review.rating }.sum / product.reviews.count.to_f
                         .d-flex.justify-content-center.product-price
                                 = number_to_currency product.price
-                .card-footer.d-flex.justify-content-between.bg-light.border
+                .card-footer.d-flex.justify-content-center.bg-light.border
                     = render "products/shared/order", product: product
 .col-12.pb-1    
     .pagination.justify-content-center.mb-3
