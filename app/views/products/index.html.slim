@@ -4,9 +4,9 @@ h1.page-title = defined?(@category) ? @category.name : "Search products"
         .col-lg-4.col-md-6.col-sm-12.pb-1
             .card.product-item.border-0.mb-4
                 = link_to defined?(@category) ? category_product_path(params[:category_id], id: product.slug) : product_path(id: product.slug) do
-                    .card-header.product-img.position-relative.overflow-hidden.bg-transparent.border.p-0
+                    .card-header.product-img.text-center.position-relative.overflow-hidden.bg-transparent.border.p-0
                         - if product.product_picture.attached?
-                            image.img-fluid.w-100 src = url_for(product.product_picture)
+                            image.img-fluid.w-75 src = url_for(product.product_picture)
                     .card-body.border-left.border-right.text-center.p-0.pt-4.pb-3
                         = product.title
                         .vendor-name = product.seller.first_name
@@ -25,9 +25,8 @@ h1.page-title = defined?(@category) ? @category.name : "Search products"
 
 - if defined?(@category)
     .btn__group
-        - if user_signed_in? and (current_user.has_role? :seller or current_user.has_role? :admin) 
-            = link_to 'New product', new_seller_product_path(categories: params[:category_id]), class: "btn btn__create"
-        br
         - if user_signed_in? and current_user.has_role? :admin
-            = link_to 'Edit Category Name', edit_admin_category_path(@category), class: "btn btn__edit"
+            = link_to 'Edit Category', edit_admin_category_path(@category), class: "btn btn__edit"
             = link_to 'Delete Category', admin_category_path(@category), method: :delete, class: "btn btn__delete"
+
+= javascript_pack_tag "cart_quantity"

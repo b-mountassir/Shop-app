@@ -1,11 +1,7 @@
 require 'sidekiq-scheduler'
 
-class HelloWorldScheduler 
+class ReminderReviewEmailScheduler 
   include Sidekiq::Worker
-
-  # def perform
-  #   puts 'Hello world every minute'
-  # end
 
   def perform
     OrderItem.joins(:user).where('reviewed_at is ? AND order_items.reminder_count < users.reminder_count', nil).each do |oi|

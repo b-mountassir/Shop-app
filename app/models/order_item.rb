@@ -1,12 +1,12 @@
 class OrderItem < ApplicationRecord
     before_save :set_unit_price 
     before_save :set_total
-
+    belongs_to :seller_order, optional: true
     validates :quantity, numericality: { greater_than: 0 }
     belongs_to :user
     belongs_to :order
     belongs_to :product
-
+    
     def unit_price
         # If there is a record
         if persisted?

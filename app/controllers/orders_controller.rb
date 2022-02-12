@@ -26,11 +26,31 @@ class OrdersController < ApplicationController
       redirect_to cart_path and return  if error != nil
       order = current_order
       if current_order.update(status: 'ordered')
-        
+        h = {}
+        order.order_items.each do |i|
+          # uni.product.seller in h
+          #   h[i.product.seller] = []
+          #   h[i.product.seller].push(i.product.seller)
+          if !h.has_key?(i.product.seller.id)
+                h[i.product.seller.id] = [].push(i)
+          else
+            h[i.product.seller.id].push(i)
+          end
+ 
+        end
+        h.each do |key,value|
+          so = SellerOrder.create(
+            order: order, 
+            buyer: current_user, 
+            seller_id: key,
+            subtotal: value.collect {|e| e.total }.sum
+          )
+          value.each do |item|
+            item.update!(seller_order: so)
+          end
+        end
+       
         OrderMailer.with(order: order).order_confirmation_email.deliver_later
-        
-        # EmailingJob.perform_later(order)
-        # session.delete(:order_id)
         flash[:notice] = "Order created successfully"
         redirect_to categories_path
       else

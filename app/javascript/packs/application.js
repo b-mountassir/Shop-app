@@ -4,6 +4,7 @@
 // that code so it'll be compiled.
 //= require jquery
 //= require jquery_ujs
+//= require jquery.easing
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
@@ -16,4 +17,11 @@ ActiveStorage.start()
 
 require("trix")
 require("@rails/actiontext")
+global.jQuery = require('jquery');
+try {
+    global.Popper = require('popper.js').default;
+    require('jquery.easing'); // dat works :3
+} catch (e) {}
+
+
 window.$ = jQuery

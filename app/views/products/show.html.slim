@@ -1,13 +1,12 @@
 .container-fluid.py-5
-    h3.breadcrumbs 
+    h3.breadcrumbs.row.px-xl-5
         = link_to @category.name, category_products_path(@category)
-    - if current_user == @product.seller
-        = link_to 'Edit product', edit_seller_product_path(@product)
     .row.px-xl-5
         .col-lg-5.pb-5
-            .product-media                
-                - if @product.product_picture.attached?
-                    image.product__image src = url_for(@product.product_picture)
+            .carousel.slide#product-carousel 
+                .carousel-inner.border.text-center
+                    - if @product.product_picture.attached?
+                        image.product__image src = url_for(@product.product_picture)
         .col-lg-7.pb-5
             h3.font-weight-semi-bold = @product.title
             .d-flex.mb-3 = render 'reviews/partials/stars', reviews: @average_rating, review_count: @review_count
@@ -20,8 +19,17 @@
 
             = render "products/shared/order", product: @product
 
-            br
-    = render "reviews/partials/review_widget", reviews: @reviews, average_rating: @average_rating, review_count: @review_count, new_review: @new_review
+            .d-flex.pt-2
+                p.text-dark.font-weight-medium.mb-0.mr-2 Share on:
+                .d-inline-flex
+                    a.text-dark.px-2 href=""
+                        i.fa.fa-facebook
+                    a.text-dark.px-2 href=""
+                        i.fa.fa-twitter
+                    a.text-dark.px-2 href=""
+                        i.fa.fa-pinterest
+    .row.px-xl-5
+        .col-12 = render "reviews/partials/review_widget", reviews: @reviews, average_rating: @average_rating, review_count: @review_count, new_review: @new_review
 
 
-        
+= javascript_pack_tag "cart_quantity"

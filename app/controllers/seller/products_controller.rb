@@ -1,9 +1,14 @@
 class Seller::ProductsController < Seller::BaseController
-    before_action :authenticate_user!, only: [:new, :create, :edit, :destroy, :update] ## require user to login 
+    before_action :authenticate_user! ## require user to login 
     before_action :set_product, only: [:show, :edit, :update, :destroy ]
+    
+    def show
+        set_product
+    end
+    
+    
     def new
         @product = Product.new
-        @category = Category.friendly.find(params[:categories])
         authorize @product
     end
 
@@ -22,7 +27,7 @@ class Seller::ProductsController < Seller::BaseController
         puts params
         respond_to do |format|
             if @product.save
-                format.html { redirect_to edit_seller_product_path(@product), notice: "Product was successfully created." }
+                format.html { redirect_to seller_product_path(@product), notice: "Product was successfully created." }
             else
                 format.html { render :new, status: :unprocessable_entity }
             end
@@ -35,7 +40,7 @@ class Seller::ProductsController < Seller::BaseController
         
         respond_to do |format|
             if @product.update(product_params)
-                format.html { redirect_to edit_seller_product_url(@product), notice: "Product was successfully updated." }
+                format.html { redirect_to seller_product_url(@product), notice: "Product was successfully updated." }
             else
                 format.html { render :edit, status: :unprocessable_entity }
             end
@@ -44,17 +49,18 @@ class Seller::ProductsController < Seller::BaseController
 
     def destroy
         authorize @product
-        @product_category = ProductCategory.find_by_product_slug(@product.slug)
+        @product_category = ProductCategory.find_by(product_id: @product.id)
         @product_category.destroy
         @product.destroy
         respond_to do |format|
-            format.html { redirect_to root_path, notice: "Product was successfully destroyed." }
+            format.html { redirect_to seller_dashboard_path, notice: "Product was successfully destroyed." }
         end
     end
 
     private
     def set_product
         @product = Product.friendly.find(params[:id])
+        @category = @product.categories.first
     end
 
     

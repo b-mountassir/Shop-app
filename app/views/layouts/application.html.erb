@@ -18,13 +18,17 @@
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
     </div>
-      <%= yield %>
+    <%= yield %>
+      
+    <%= render "partials/footer"%>
+      <a href="#" class="btn btn-primary back-to-top" style="display: inline;">
+        <i class="fa fa-angle-double-up"></i>
+      </a>
     <footer>
     </footer>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <%= javascript_pack_tag 'main' %>
     <%= javascript_pack_tag 'search' %>
     <%= javascript_pack_tag 'starRating' %>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

@@ -1,0 +1,35 @@
+html
+  head
+    meta content='text/html; charset=UTF-8' http-equiv='Content-Type' 
+
+  body
+    h2
+      | Dear 
+      = @item.user.first_name
+      |  
+      = @item.user.last_name
+    p
+      | You have recently purchased the following items from our Shop:
+
+    = form_with(model: @new_review, url: reviews_from_email_url) do |f|
+			.field
+					.review-title = f.label :title
+					.review-title__field = f.text_field :title
+
+			.field 
+					= f.label :rating   
+			span.star-field 
+					- (1..5).each do |r|
+							= f.label dom_id(@item, r), :" ", class: "star star--on"
+							a.hidden = f.radio_button :rating, r, id: "review_" + dom_id(@item, r), checked: r == 5, class:"star-rating"
+			br
+			= f.hidden_field :order_item_id, value: @item.id
+			= f.hidden_field :authorization_token, value: @jwt
+
+			.field
+					.review-body = f.label :body
+					.review-body__field = f.text_area :body
+			br
+			.field 
+					= f.submit :create, value: "Submit"
+

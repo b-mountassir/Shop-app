@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :products, foreign_key: :seller_id
+  has_many :seller_orders, foreign_key: :seller_id
   has_one_attached :profile_picture
   has_many :reviews, foreign_key: :reviewer_id, dependent: :delete_all
   rolify

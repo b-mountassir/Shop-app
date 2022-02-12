@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
     before_action :set_category, only: :show
     before_action :set_new_review, only: :show
-
+    before_action :set_product, only: :show
     def index        
         unless params.has_key?(:q)
             @category = Category.friendly.find(params[:category_id])
@@ -13,11 +13,8 @@ class ProductsController < ApplicationController
         end
     end
     def show 
-        unless defined?(@product)
-            @product = @category.products.find(params[:id])
-        end
-        
-        
+
+        @category = @product.categories.first
         @review_count = @product.reviews.count
         if @review_count > 0
             @pagy, @reviews = pagy(@product.reviews.order("created_at DESC"), items: 5)
@@ -28,13 +25,13 @@ class ProductsController < ApplicationController
     
 
     private 
+    def set_product
+        @product = Product.friendly.find(params[:id])
+    end
 
     def set_category
         if params.has_key?(:category_id)
             @category = Category.friendly.find(params[:category_id])
-        else
-            @product = Product.friendly.find(params[:id])
-            @category = @product.categories.first
         end
     end
     

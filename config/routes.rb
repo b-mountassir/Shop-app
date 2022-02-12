@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   namespace :seller do
     resources :products
+    get "/dashboard", to: 'dashboard#index'
   end
   get '/search', to: 'products#index'
   resources :products
@@ -27,8 +28,9 @@ Rails.application.routes.draw do
 
   delete '/empty_cart', to: 'order_items#destroy_all'
 
-  resources :reviews, only: %i(create update destroy)
-
+  resources :reviews, only: %i(create update destroy) 
+   
+  post 'reviews_from_email', to: 'reviews#create_from_email'
   get '/reviews', to: 'reviews#new'
 
   mount Sidekiq::Web => '/sidekiq'

@@ -1,0 +1,30 @@
+.container.float-right
+    
+    .d-flex.pb-1.justify-content-end
+        - if user_signed_in? and (current_user.has_role? :seller or current_user.has_role? :admin) 
+            = link_to 'New product', new_seller_product_path, class: "btn btn__create"
+    - @products.each do |product|
+            .row-lg-4.row-md-6.row-sm-12.pb-1
+                .row.w-100.product-item.border
+                    .col.row-12
+                        = link_to defined?(@category) ? category_product_path(params[:category_id], id: product.slug) : product_path(id: product.slug) do
+                            .position-relative.overflow-hidden.bg-transparent.p-0
+                                - if product.product_picture.attached?
+                                    image.img-fluid.w-25 src = url_for(product.product_picture)
+                            .d-inline-flex.text-center
+                                = product.title
+                    .col
+                        .justify-content-center.pt-2
+                            = product.stock    
+                    .col
+                        .justify-content-center.product-price.pt-2
+                            = number_to_currency product.price
+                    .col
+                        - if current_user == product.seller
+                            = link_to 'Edit product', edit_seller_product_path(product), class: "btn px-3"
+                            = link_to 'Delete product', seller_product_path(product), class: "btn px-3", method: :delete, data: { confirm: 'Are you sure?' }
+
+    .col-12.pb-1    
+        .pagination.justify-content-center.mb-3
+            = sanitize pagy_nav(@pagy) if @pagy.pages > 1
+

@@ -2,3 +2,6 @@
   hello_world:
     cron: '0 * * * * *'   
     class: HelloWorldScheduler
+  reminder_review_email:
+    cron: '0 0 * * *'
+    class: ReminderReviewEmailScheduler
