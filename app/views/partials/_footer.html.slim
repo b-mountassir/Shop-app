@@ -1,0 +1,48 @@
+.container-fluid.bg-secondary.text-dark.mt-5.pt-5
+    .row.px-xl-5.pt-5
+        .col-lg-4.col-md-12.mb-5.pr-3.pr-xl-5
+            a.text-decoration-none.d-block href = root_path
+                h1.m-0.display-5.font-weight-semi-bold
+                    span.text-primary.font-weight-bold.border.px-3.mr-1 Shop 
+                    | App
+            p.mb-2 
+            p.mb-2
+            p.mb-8
+
+        .col-lg-8.col-md-12
+            .row
+                .col-md-4.mb-5
+                    .font-weight-bold.text-dark.mb-4
+                        | Quick links
+                    .d-flex.flex-column.justify-content-start
+                        a.text-dark.mb-2 href = root_path
+                            i.fa.fa-angle-right.mr-2
+                            | Home
+                        a.text-dark.mb-2 href = categories_path
+                            i.fa.fa-angle-right.mr-2
+                            | Categories
+                .col-md-4.mb-5
+                    .font-weight-bold.text-dark.mb-4
+                        | Quick links
+                    .d-flex.flex-column.justify-content-start
+                        a.text-dark.mb-2 href = root_path
+                            i.fa.fa-angle-right.mr-2
+                            | Home
+                        a.text-dark.mb-2 href = categories_path
+                            i.fa.fa-angle-right.mr-2
+                            | Categories
+                .col-md-4.mb-5
+                    .font-weight-bold.text-dark.mb-4
+                        | Newsletter
+                    form
+                        .form-group
+                            input type="text" placeholder="Your Name" class="form-control border-0 py-4"
+                        .form-group
+                            input type="text" placeholder="Your Email" class="form-control border-0 py-4"
+                        div
+                            button type="submit" class="btn btn-primary btn-block border-0 py-3"
+                                | Submit
+    .row.border-top.border-light.mx-xl-5.py-4
+        .col-md-6.px-xl-0
+
+        .mb-md-0.text-center.text-md-left.text-dark

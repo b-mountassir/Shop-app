@@ -1,4 +1,11 @@
-= form_for item, remote: true do |f|
-  = f.hidden_field :product_id, value: item.product_id
-  .cell = f.number_field :quantity, value:  item.quantity.to_i
-  .cell = f.submit "Update cart"
+.align-middle
+  = form_for item, remote: true do |f|
+    = f.hidden_field :product_id, value: item.product_id
+    .input-group.quantity.mx-auto style="width: 100px;"
+      .input-group-btn
+          = f.button class:"btn btn-sm btn-primary btn-minus"
+              .fa.fa-minus
+      = f.text_field  :quantity, value:  item.quantity.to_i, class: "form-control form-control-sm bg-secondary text-center"
+      .input-group-btn
+          = f.button class:"btn btn-sm btn-primary btn-plus"
+              .fa.fa-plus

@@ -14,7 +14,9 @@
             .cell.align-middle = item.product.price
             .cell.align-middle = item.total  
             = render 'cart/partials/update_cart_item_form', item: item, class: "align-middle"
-            = link_to "Remove items", item, method: :delete, remote: true, class: "align-middle"
+            .cell.align-middle
+              = link_to item, method: :delete, remote: true, class: "btn btn-sm btn-primary" do
+                i.fa.fa-times
       - if @order_items.length > 0
         span.cart__empty
           = form_for :order_item, url: empty_cart_path, method: :delete, remote: true do |f|
@@ -46,4 +48,5 @@
 
         
                     
-                
+
+= javascript_pack_tag "cart_quantity"

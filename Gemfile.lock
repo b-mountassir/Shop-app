@@ -182,6 +182,8 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jmespath (1.5.0)
+    jquery-easing-rails (0.0.2)
+      railties (>= 3.1.0)
     jwt (2.3.0)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -379,6 +381,7 @@ DEPENDENCIES
   haml-rails
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
+  jquery-easing-rails (~> 0.0.2)
   jwt
   listen (~> 3.3)
   omniauth-google-oauth2

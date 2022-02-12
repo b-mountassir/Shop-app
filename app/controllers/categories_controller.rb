@@ -4,5 +4,6 @@ class CategoriesController < ApplicationController
   end
   def home
     @categories = Category.last(4)
+    @home_page = "home"
   end
 end

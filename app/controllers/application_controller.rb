@@ -4,13 +4,24 @@ class ApplicationController < ActionController::Base
     include Pundit
     include Pagy::Backend
     include ApplicationHelper
+    before_action :set_categories
     
     before_action :set_search
+    rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
     def set_search
         @q = Product.search(params[:q])
     end
 
+    def set_categories
+        @categoies_nav = Category.order(:name)
+    end
+
+    private
+    def user_not_authorized
+       flash[:notice] = "Sorry, You Are Not Authorized To Do This"
+       redirect_to(request.referrer || root_path)
+    end
     protected
 
     def configure_permitted_parameters
