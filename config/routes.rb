@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   namespace :seller do
     resources :products
     get "/dashboard", to: 'dashboard#index'
+    get "/dashboard/orders", to: 'dashboard#show'
+
   end
   get '/search', to: 'products#index'
   resources :products

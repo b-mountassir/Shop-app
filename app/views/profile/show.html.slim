@@ -1,11 +1,27 @@
-= @user.first_name
-br
-= @user.last_name
-br
-- if @user.profile_picture.attached?
-    image src= url_for(@user.profile_picture)
-br
+.container.rounded.bg-white.mt-5.mb-5
+  .row
+    .col-md-3.border-right
+      .d-flex.flex-column.align-items-center.text-center.p-3.py-5
+        image.rounded-circle.mt-5 src = url_for(@user.profile_picture) width="150px"
+        span.font-weight-bold = @user.username
+        span.text-black-50 = @user.email
+        span
+    .col-md-5.border-right
+      .p-3.py-5
+        .d-flex.justify-content-between.align-items-center.mb-3
+          h4.text-right Profile
+        .row.mt-2
+          .col-md-6
+            label.labels Name
+            .form-control = @user.first_name 
+          .col-md-6
+            label.labels Surname
+            .form-control = @user.last_name 
+          hr
+          .col-md-12
+            | Role
+          br/
+          .col-md-12
+            .form-control = @user.roles.first.name
 
-    hr
-
-.edit_profile = link_to "Edit profile", edit_user_registration_path
+      = link_to "Edit profile", edit_user_registration_path, class:"btn btn-primary profile-button"

@@ -24,7 +24,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     super
-    if resource.has_role? :buyer or resource.has_role? :seller
+    unless resource.has_role? :admin
       resource.update(roles: [Role.find_by(name: params[:user][:roles])])
     end
   end
@@ -65,6 +65,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
   protected
+
+  def after_update_path_for(resource)
+      flash[:notice] = "Profile succesfully updated"
+      edit_user_registration_path
+  end
 
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [roles: []])

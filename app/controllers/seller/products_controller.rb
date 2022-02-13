@@ -49,11 +49,10 @@ class Seller::ProductsController < Seller::BaseController
 
     def destroy
         authorize @product
-        @product_category = ProductCategory.find_by(product_id: @product.id)
-        @product_category.destroy
-        @product.destroy
-        respond_to do |format|
-            format.html { redirect_to seller_dashboard_path, notice: "Product was successfully destroyed." }
+        if @product.soft_destroy
+             redirect_to seller_dashboard_path, notice: "Product was successfully destroyed."  
+        else
+            redirect_to @product, flash: { error: "Product could not be deleted" }
         end
     end
 
@@ -65,7 +64,12 @@ class Seller::ProductsController < Seller::BaseController
 
     
     def product_params
-        params.require(:product).permit(:title, :description, :price, :stock, :product_picture, category_ids: [])
+        if !@product.published?
+            params.require(:product).permit(:title, :description, :price, :stock,
+         :product_picture, :published, category_ids: [])
+        else
+            params.require(:product).permit(:stock, :published, :on_sale)
+        end
     end
     
 end

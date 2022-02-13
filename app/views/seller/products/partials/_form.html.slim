@@ -11,27 +11,37 @@
 
   .field 
     = form.label :title
-    = form.text_field :title
+    = form.text_field :title, disabled: @product.published
 
   .field
     = form.label :description
-    = form.rich_text_area :description
+    = form.rich_text_area :description, disabled: @product.published
 
   .field
     = form.label :price
-    = form.text_field :price
+    = form.text_field :price, disabled: @product.published
     
   .field
     = form.label :stock
     = form.number_field :stock
   .field
     = form.label :product_picture
-    = form.file_field :product_picture
+    = form.file_field :product_picture, disabled: @product.published
   .field
     - Category.all.each do |category|
       = hidden_field_tag "product[category_ids][]", nil
-      = check_box_tag "product[category_ids][]", category.id, @product.categories.include?(category), id: dom_id(category)
+      = check_box_tag "product[category_ids][]", category.id, @product.categories.include?(category), id: dom_id(category), disabled: @product.published
       = label_tag dom_id(category), category.name 
       br
+
+  .custom-control.custom-switch
+    = form.check_box :published, class: "custom-control-input", id: "published"
+    label.custom-control-label for="published" Published: 
+  .custom-control.custom-switch
+    = form.check_box :on_sale, class: "custom-control-input", id: "on_sale"
+    label.custom-control-label for="on_sale" On sale: 
   .actions
     = form.submit
+
+script type="text/javascript"
+  | $(".trix-button-group--file-tools").remove()

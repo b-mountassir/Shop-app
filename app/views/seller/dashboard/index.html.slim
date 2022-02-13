@@ -1,13 +1,28 @@
-.container.float-right
+.container
     
     .d-flex.pb-1.justify-content-end
         - if user_signed_in? and (current_user.has_role? :seller or current_user.has_role? :admin) 
             = link_to 'New product', new_seller_product_path, class: "btn btn__create"
-    - @products.each do |product|
-            .row-lg-4.row-md-6.row-sm-12.pb-1
+
+    .row
+        .col-lg-3.col-md-12
+                .border-bottom.mb-4.pb-4
+                    .font-weight-semi-bold.mb-4
+                        | Orders
+                    = link_to "Your Orders", seller_dashboard_orders_path, class: "btn btn-sm"
+                .border-bottom.mb-4.pb-4
+                .mb-5
+        .col-lg-9.col-md-12 
+            .row.w-100.product-item.border
+                .col.row-12 Product 
+                .col Stock 
+                .col Price 
+                .col Edit
+               
+            - @products.each do |product|
                 .row.w-100.product-item.border
                     .col.row-12
-                        = link_to defined?(@category) ? category_product_path(params[:category_id], id: product.slug) : product_path(id: product.slug) do
+                        = link_to seller_product_path(id: product.slug) do
                             .position-relative.overflow-hidden.bg-transparent.p-0
                                 - if product.product_picture.attached?
                                     image.img-fluid.w-25 src = url_for(product.product_picture)
@@ -24,7 +39,7 @@
                             = link_to 'Edit product', edit_seller_product_path(product), class: "btn px-3"
                             = link_to 'Delete product', seller_product_path(product), class: "btn px-3", method: :delete, data: { confirm: 'Are you sure?' }
 
-    .col-12.pb-1    
-        .pagination.justify-content-center.mb-3
-            = sanitize pagy_nav(@pagy) if @pagy.pages > 1
+            .col-12.pb-1    
+                .pagination.justify-content-center.mb-3
+                    = sanitize pagy_nav(@pagy) if @pagy.pages > 1
 

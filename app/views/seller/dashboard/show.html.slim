@@ -1,0 +1,27 @@
+.row.text-center 
+    .col #Order id
+    .col Buyer
+    .col
+        .row
+            .col Order items
+            .col Quantity
+            .col Price 
+    .col Total
+hr
+- @orders.each do |order|
+    .row.text-center
+        .col = order.id
+        .col = order.buyer.username
+        .col
+            - order.order_items.each do |order_item|
+                .row
+                    .col = order_item.product.title
+                    .col = order_item.quantity
+                    .col = order_item.product.price
+                hr
+                
+        .col = order.subtotal
+                
+                
+    hr
+    
