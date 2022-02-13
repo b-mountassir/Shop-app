@@ -18,10 +18,4 @@
 
             p.mb-4 =  @product.description.to_s
 
-            = render "products/shared/order", product: @product
 
-            br
-    = render "reviews/partials/review_widget", reviews: @reviews, average_rating: @average_rating, review_count: @review_count, new_review: @new_review
-
-
-        

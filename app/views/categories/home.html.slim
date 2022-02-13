@@ -3,7 +3,7 @@ h1.page-title ShopApp
 .collection
     - @categories.each do |category|
       h2.page-title = category.name 
-      .collection__products.home-cards__grid 
+      .collection__products.home-cards__grid.row
           - category.products.last(5).sort_by(&:title).each do |product|
               .col-lg-2.col-md-6.col-sm-12.pb-1
                 .card.product-item.border-0.mb-4

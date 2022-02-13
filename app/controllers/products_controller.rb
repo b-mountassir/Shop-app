@@ -5,11 +5,11 @@ class ProductsController < ApplicationController
     def index        
         unless params.has_key?(:q)
             @category = Category.friendly.find(params[:category_id])
-            @pagy, @products = pagy(@category.products.order(:title), items: 9)
+            @pagy, @products = pagy(@category.products.published.order(:title), items: 9)
         else
-            @q = Product.ransack(params[:q])
+            @q = Product.published.ransack(params[:q])
             puts params[:q]
-            @pagy, @products = pagy(@q.result(distinct: true), items: 20)
+            @pagy, @products = pagy(@q.result(distinct: true), items: 21)
         end
     end
     def show 
@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
 
     private 
     def set_product
-        @product = Product.friendly.find(params[:id])
+        @product = Product.published.friendly.find(params[:id])
     end
 
     def set_category

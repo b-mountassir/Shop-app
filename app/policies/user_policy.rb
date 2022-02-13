@@ -13,15 +13,15 @@ class UserPolicy
     end
   
     def show?
-      is_admin?(@current_user) or @current_user == @user
+        @current_user.has_role? :admin or @current_user == @user
     end
   
     def update?
-      is_admin?(@current_user) or @current_user == @user 
+        @current_user.has_role? :admin or @current_user == @user 
     end
   
     def destroy?
-      is_admin?(@current_user) or @current_user == @user
+        @current_user.has_role? :admin or @current_user == @user
     end
   
   end

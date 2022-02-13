@@ -1,4 +1,4 @@
-class CategoryPolicy < ApplicationPolicy
+class Admin::CategoryPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope.all

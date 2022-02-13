@@ -43,7 +43,7 @@ class OrderItemsController < ApplicationController
   private 
 
   def set_product
-    product = Product.find(order_params[:product_id])
+    product = Product.onsale.find(order_params[:product_id])
   end
 
   def set_order
