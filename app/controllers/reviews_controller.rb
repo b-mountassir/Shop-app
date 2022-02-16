@@ -1,9 +1,10 @@
 class ReviewsController < ApplicationController
     skip_before_action :verify_authenticity_token
     before_action :authenticate_user!
+    error = 201
     def create
         # check order item belongs to user???
-        @order_item = OrderItem.find_by(id: review_params[:order_item_id], reviewed_at: nil)
+        @order_item = OrderItem.find_by(user_id: current_user.id, id: review_params[:order_item_id], reviewed_at: nil)
         if @order_item.nil? 
             flash[:error] = "Review failed"
             redirect_to(request.referrer || root_path) and return
@@ -22,7 +23,12 @@ class ReviewsController < ApplicationController
             flash[:notice] = "Review successfully created"
         else
             flash[:error] = "Review failed"
+            error = 500
         end
+        render json: {
+            error: "No such user; check the submitted email address",
+            status: "cannot review"
+          }, status: error
     end
 
     def create_from_email
