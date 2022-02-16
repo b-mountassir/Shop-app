@@ -13,7 +13,7 @@ class Seller::ProductsController < Seller::BaseController
     end
 
     def edit
-        authorize @product
+        @product
         
         @category = @product.categories.first
     end
@@ -21,10 +21,9 @@ class Seller::ProductsController < Seller::BaseController
     def create
        
         @product = Product.new(product_params)
-        @product.product_picture.attach(params[:product_picture])
+        @product.product_picture.attach(product_params[:product_picture])
         @product.seller = current_user
         authorize @product
-        puts params
         respond_to do |format|
             if @product.save
                 format.html { redirect_to seller_product_path(@product), notice: "Product was successfully created." }
@@ -35,11 +34,9 @@ class Seller::ProductsController < Seller::BaseController
     end
 
     def update
-        params[:product][:category_ids] ||= []
-        authorize @product
         
         respond_to do |format|
-            if @product.update(product_params)
+            if @product.update(ActiveModel::Type::Boolean.new.cast(product_params[:published]) ? product_params : product_params.merge(on_sale: false))
                 format.html { redirect_to seller_product_url(@product), notice: "Product was successfully updated." }
             else
                 format.html { render :edit, status: :unprocessable_entity }
@@ -48,7 +45,7 @@ class Seller::ProductsController < Seller::BaseController
     end
 
     def destroy
-        authorize @product
+        @product
         if @product.soft_destroy
              redirect_to seller_dashboard_path, notice: "Product was successfully destroyed."  
         else
@@ -58,17 +55,22 @@ class Seller::ProductsController < Seller::BaseController
 
     private
     def set_product
-        @product = Product.friendly.find(params[:id])
+        @product = authorize Product.friendly.find(params[:id])
         @category = @product.categories.first
     end
 
     
     def product_params
-        if !@product.published?
-            params.require(:product).permit(:title, :description, :price, :stock,
-         :product_picture, :published, category_ids: [])
+        if defined?(@product.published)
+            unless @product.published?
+                params.require(:product).permit(:title, :description, :price, :stock,
+                :product_picture, :published, :on_sale, category_ids: [])
+            else            
+                params.require(:product).permit(:stock, :published, :on_sale)
+            end
         else
-            params.require(:product).permit(:stock, :published, :on_sale)
+            params.require(:product).permit(:title, :description, :price, :stock,
+                :product_picture, :published, :on_sale, category_ids: [])
         end
     end
     

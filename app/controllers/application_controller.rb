@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
     def set_search
-        @q = Product.search(params[:q])
+        @q = Product.ransack(params[:q])
     end
 
     def set_categories

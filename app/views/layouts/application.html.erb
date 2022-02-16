@@ -18,8 +18,9 @@
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
     </div>
-    <%= yield %>
-      
+    <div class="col-lg-12 col-md-12" id="search-results">
+    </div>  
+      <%= yield %>
     <%= render "partials/footer"%>
       <a href="#" class="btn btn-primary back-to-top" style="display: inline;">
         <i class="fa fa-angle-double-up"></i>
@@ -30,5 +31,6 @@
     <%= javascript_pack_tag 'main' %>
     <%= javascript_pack_tag 'search' %>
     <%= javascript_pack_tag 'starRating' %>
+    <%= javascript_pack_tag 'modalOpen', defer: true %>
   </body>
 </html>

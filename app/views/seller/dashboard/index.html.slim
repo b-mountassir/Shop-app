@@ -2,7 +2,7 @@
     
     .d-flex.pb-1.justify-content-end
         - if user_signed_in? and (current_user.has_role? :seller or current_user.has_role? :admin) 
-            = link_to 'New product', new_seller_product_path, class: "btn btn__create"
+            a.btn.btn__create#create-new-product New product 
 
     .row
         .col-lg-3.col-md-12

@@ -9,7 +9,7 @@
                 - if @product.product_picture.attached?
                     image.product__image src = url_for(@product.product_picture)
         .col-lg-7.pb-5
-            h3.font-weight-semi-bold = @product.title
+            h3.font-weight-semi-bold = link_to @product.title, product_path(@product)
             .d-flex.mb-3 = render 'reviews/partials/stars', reviews: @average_rating, review_count: @review_count
 
 

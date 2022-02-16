@@ -11,7 +11,7 @@ hr
 - @orders.each do |order|
     .row.text-center
         .col = order.id
-        .col = order.buyer.username
+        .col = link_to order.buyer.username, user_path(order.buyer.username)
         .col
             - order.order_items.each do |order_item|
                 .row
@@ -19,7 +19,7 @@ hr
                     .col = order_item.quantity
                     .col = order_item.product.price
                 hr
-                
+
         .col = order.subtotal
                 
                 

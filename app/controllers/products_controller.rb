@@ -1,16 +1,10 @@
 class ProductsController < ApplicationController
     before_action :set_category, only: :show
-    before_action :set_new_review, only: :show
     before_action :set_product, only: :show
+    before_action :set_new_review, only: :show
     def index        
-        unless params.has_key?(:q)
-            @category = Category.friendly.find(params[:category_id])
-            @pagy, @products = pagy(@category.products.published.order(:title), items: 9)
-        else
-            @q = Product.published.ransack(params[:q])
-            puts params[:q]
-            @pagy, @products = pagy(@q.result(distinct: true), items: 21)
-        end
+        @category = Category.friendly.find(params[:category_id])
+        @pagy, @products = pagy(@category.products.published.order(:title), items: 9)
     end
     def show 
 
@@ -22,7 +16,10 @@ class ProductsController < ApplicationController
         end
     end
     
-    
+    def search
+        @q = Product.published.ransack(params[:q])
+        @pagy, @products = pagy(@q.result(distinct: true), items: 21)
+    end
 
     private 
     def set_product
@@ -36,7 +33,7 @@ class ProductsController < ApplicationController
     end
     
     def set_new_review
-        
+
         if user_signed_in?
              @order_item = current_user.order_items.find_by(product: @product, reviewed_at: nil)
         end

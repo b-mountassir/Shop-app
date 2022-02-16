@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'categories#home'
   resources :categories do 
-    resources :products
+    resources :products do
+      collection do
+        match 'search' => 'prdocuts#search', via: [:get, :post], as: :search
+      end
+    end
   end
 
   namespace :admin do
@@ -17,16 +21,19 @@ Rails.application.routes.draw do
     resources :products
     get "/dashboard", to: 'dashboard#index'
     get "/dashboard/orders", to: 'dashboard#show'
-
   end
   get '/search', to: 'products#index'
-  resources :products
+  resources :products do
+    collection do
+      match 'search' => 'products#search', via: [:get, :post], as: :search
+    end
+  end
 
   resources :order_items, only: %i(create update destroy)
   resources :orders, only: %i(create show index)
   get '/cart', to: 'cart#show'
 
-  get '/users', to: 'profile#show'
+  get '/users/:username', to: 'profile#show', as: 'user'
 
   delete '/empty_cart', to: 'order_items#destroy_all'
 

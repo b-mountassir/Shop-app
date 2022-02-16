@@ -4,7 +4,7 @@ h1.page-title ShopApp
     - @categories.each do |category|
       h2.page-title = category.name 
       .collection__products.home-cards__grid.row
-          - category.products.last(5).sort_by(&:title).each do |product|
+          - category.products.published.last(5).sort_by(&:title).each do |product|
               .col-lg-2.col-md-6.col-sm-12.pb-1
                 .card.product-item.border-0.mb-4
                     = link_to defined?(@category) ? category_product_path(params[:category_id], id: product.slug) : product_path(id: product.slug) do
