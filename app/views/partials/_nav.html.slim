@@ -6,9 +6,9 @@
                     span.text-primary.font-weight-bold.border.px-3.mr-1 Shop 
                     | App
         .col-lg-6.col-6.text-left
-            = search_form_for @q, url: products_path do |f|
+            = search_form_for @q, url: search_products_path, remote: true do |f|
                 .input-group
-                    = f.text_field :title_cont, id: :query, class: "form-control", placeholder: "Search for a product"
+                    = f.text_field :title_or_description_cont, id: :query, class: "form-control", placeholder: "Search for a product"
                     .input-group-append
                         .input-group-text.bg-transparent.text-primary
                             = f.button :submit, id: :search, class:"search-btn"
@@ -51,12 +51,14 @@
                             .dropdown.nav-item.d-flex
                                 a.nav-link.dropdown-toggle href="#" data-toggle="dropdown" = current_user.username ? current_user.username : current_user.email
                                 .dropdown-menu.rounded-0.m-0 
-                                    = link_to "Profile", users_path, class: "dropdown-item" 
+                                    = link_to "Profile", user_path(current_user.username), class: "dropdown-item" 
                                     - if user_signed_in? 
                                         -if current_user.has_role? :admin
                                             = link_to 'Admin Dashboard', admin_dashboard_path, class: "dropdown-item"  
                                         - if current_user.has_role? :seller or current_user.has_role? :admin
                                             = link_to 'Dashboard', seller_dashboard_path, class: "dropdown-item"
+                                        - if current_user.has_role? :buyer or current_user.has_role? :admin
+                                            = link_to "My orders", orders_path, class:"dropdown-item"
                                     = link_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item"
                                             
                             

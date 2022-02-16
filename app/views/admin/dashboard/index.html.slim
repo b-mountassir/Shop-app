@@ -1,15 +1,16 @@
-h1 Admin dasboard 
+.container
+    h1 Admin dasboard 
 
-= link_to "New category", new_admin_category_path
+    = link_to "New category", new_admin_category_path
 
-h2 Users
+    h2 Users
 
-table 
-    tr
-        th Emails
-        th Roles
-
-    - @users.each do |user|
+    table 
         tr
-            td = user.email
-            td = user.roles.first.name
+            th Emails
+            th Roles
+
+        - @users.each do |user|
+            tr
+                td = user.email
+                td = user.roles.first.name

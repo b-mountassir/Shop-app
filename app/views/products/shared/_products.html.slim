@@ -1,0 +1,36 @@
+
+.col-lg-9.col-md-12
+    h1.page-title = defined?(@category) ? @category.name : "Search products"    
+    .row.pb-3
+        - unless @products.length == 0 
+            - @products.each do |product|
+                .col-lg-4.col-md-6.col-sm-12.pb-1
+                    .card.product-item.border-0.mb-4
+                        = link_to defined?(@category) ? category_product_path(params[:category_id], id: product.slug) : product_path(id: product.slug) do
+                            .card-header.product-img.text-center.position-relative.overflow-hidden.bg-transparent.border.p-0
+                                - if product.product_picture.attached?
+                                    image.img-fluid.w-75 src = url_for(product.product_picture)
+                            .card-body.border-left.border-right.text-center.p-0.pt-4.pb-3
+                                = product.title
+                                .vendor-name = product.seller.first_name
+                                br
+                                - if product.reviews.count > 0
+                                    = render 'reviews/partials/stars',
+                                    product_reviews_count: product.reviews.count,
+                                    reviews: product.reviews.collect { |review| review.rating }.sum / product.reviews.count.to_f
+                                .d-flex.justify-content-center.product-price
+                                    = number_to_currency product.price
+                        .card-footer.d-flex.justify-content-center.bg-light.border
+                            = render "products/shared/order", product: product
+            .col-12.pb-1    
+                .pagination.justify-content-center.mb-3
+                    = sanitize pagy_nav(@pagy) if @pagy.pages > 1
+        - else
+            .col-lg-12.col-md-12.col-sm-12.pb-1
+                | No results found for "
+                = params[:q]["title_or_description_cont"]
+                | "
+
+
+
+    

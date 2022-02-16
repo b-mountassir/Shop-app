@@ -7,7 +7,7 @@
         .review_timestamp 
             = review.created_at.strftime("%Y/%m/%d at %H:%M")
         .review_rating 
-            = render 'reviews/partials/stars', reviews: review.rating, dummy_variable: @reviews.count
+            = render 'reviews/partials/stars', reviews: review.rating, dummy_variable: reviews
         strong.review_title = review.title 
         .review_content = review.body
 

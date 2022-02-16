@@ -1,0 +1,18 @@
+.order-line
+    .order-line__items 
+        .order_id = link_to items.id, order_path(items)
+        - items.order_items.each do |item|
+            .product_title = link_to item.product.title, product_path(item.product)
+            .product_quantity = item.quantity
+            - unless item.reviewed_at? 
+                div id = item.product.slug   
+                    = render "reviews/partials/form", new_review: item.product.reviews.new(order_item_id: item.id), item: item
+
+            - else 
+                .review-items__item
+                    .review_timestamp 
+                        = item.product.reviews.find_by(reviewer_id: current_user.id).created_at.strftime("%Y/%m/%d at %H:%M")
+                    .review_rating 
+                        = render 'reviews/partials/stars', reviews: item.product.reviews.find_by(reviewer_id: current_user.id).rating, dummy_variable: item.product.reviews.count
+                    strong.review_title = item.product.reviews.find_by(reviewer_id: current_user.id).title 
+                    .review_content = item.product.reviews.find_by(reviewer_id: current_user.id).body

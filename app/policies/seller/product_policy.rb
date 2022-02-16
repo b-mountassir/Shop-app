@@ -7,6 +7,9 @@ class Seller::ProductPolicy < ApplicationPolicy
   def create?
     user.has_role?(:seller) || user.has_role?(:admin)
   end
+  def show?
+    user.has_role?(:seller) || user.has_role?(:admin)
+  end
   def destroy?
     user == record.seller || user.has_role?(:admin)
   end

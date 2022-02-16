@@ -1,5 +1,4 @@
 class Product < ApplicationRecord
-    include Deletable
     extend FriendlyId
     friendly_id :title, use: %i(slugged history finders)
     validates_presence_of :price, :title, :stock, :categories
@@ -12,8 +11,20 @@ class Product < ApplicationRecord
 
     belongs_to :seller, class_name: 'User'
     
+    default_scope -> { where(deleted_at: nil) }
+    scope :with_deleted, -> { unscope(where: :deleted_at) }
+    scope :only_deleted, -> { with_deleted.where.not(deleted_at: nil) }
+    
     scope :published, -> { where(published: true) }
     scope :onsale, -> { where(on_sale: true) }
+
+    define_model_callbacks :soft_destroy
+
+    def soft_destroy
+        run_callbacks :soft_destroy do
+            update_column("deleted_at", Time.now)
+        end
+    end
 
     def should_generate_new_friendly_id? #will change the slug if the name changed
         title_changed?

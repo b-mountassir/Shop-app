@@ -1,8 +1,7 @@
 class ProfileController < ApplicationController
 
     def show
-        if user_signed_in?
-            @user = current_user
-        end
+        @user = User.find_by(username: params[:username])
+        @pagy, @reviews = pagy(@user.reviews)
     end
 end
