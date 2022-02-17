@@ -1,0 +1,7 @@
+{
+    "name": "Shop App",
+    "description": "A barebones rails app",
+    "repository": "https://github.com/b-mountassir/Shop-app/",
+    "logo": "https://node-js-sample.herokuapp.com/node.png",
+    "keywords": ["rails", "ecommerce"]
+}
