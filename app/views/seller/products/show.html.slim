@@ -2,7 +2,7 @@
     h3.breadcrumbs 
         = link_to @category.name, category_products_path(@category)
     - if current_user == @product.seller
-        = link_to 'Edit product', edit_seller_product_path(@product)
+        a.btn.px-3.edit-product data="#{@product.slug}" Edit product 
     .row.px-xl-5
         .col-lg-5.pb-5
             .product-media                

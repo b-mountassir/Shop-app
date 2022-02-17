@@ -36,7 +36,7 @@
                             = number_to_currency product.price
                     .col
                         - if current_user == product.seller
-                            = link_to 'Edit product', edit_seller_product_path(product), class: "btn px-3"
+                            a.btn.px-3.edit-product data="#{product.slug}" Edit product 
                             = link_to 'Delete product', seller_product_path(product), class: "btn px-3", method: :delete, data: { confirm: 'Are you sure?' }
 
             .col-12.pb-1    
