@@ -99,7 +99,7 @@ $(document).ready(function() {
     });
     $('.edit-product').click(function(e) {
         let dataSlug = $(this).attr('data')
-        let productUrl = 'http://localhost:3000/seller/products/' + dataSlug + '/edit'
+        let productUrl = 'https://shop-app-mountassir.herokuapp.com/seller/products/' + dataSlug + '/edit'
         editProduct();
 
         function editProduct() {
