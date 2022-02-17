@@ -97,4 +97,21 @@ $(document).ready(function() {
             e.preventDefault();
         }
     });
+    $('.edit-product').click(function(e) {
+        let dataSlug = $(this).attr('data')
+        let productUrl = 'http://localhost:3000/seller/products/' + dataSlug + '/edit'
+        editProduct();
+
+        function editProduct() {
+            $.ajax({
+                type: 'get',
+                url: productUrl,
+                success: function() {
+                    // Add response in Modal body
+                    modal.open();
+                }
+            });
+            e.preventDefault();
+        }
+    });
 });

@@ -16,6 +16,7 @@ class Seller::ProductsController < Seller::BaseController
         @product
         
         @category = @product.categories.first
+
     end
 
     def create
@@ -26,7 +27,8 @@ class Seller::ProductsController < Seller::BaseController
         authorize @product
         respond_to do |format|
             if @product.save
-                format.html { redirect_to seller_product_path(@product), notice: "Product was successfully created." }
+                format.html { redirect_to(request.referrer || seller_product_path(@product)) }
+                flash[:notice] = "Product was successfully created." 
             else
                 format.html { render :new, status: :unprocessable_entity }
             end
@@ -37,7 +39,8 @@ class Seller::ProductsController < Seller::BaseController
         
         respond_to do |format|
             if @product.update(ActiveModel::Type::Boolean.new.cast(product_params[:published]) ? product_params : product_params.merge(on_sale: false))
-                format.html { redirect_to seller_product_url(@product), notice: "Product was successfully updated." }
+                format.html { redirect_to(request.referrer || seller_product_path(@product)) }
+                flash[:notice] = "Product was successfully updated." 
             else
                 format.html { render :edit, status: :unprocessable_entity }
             end
