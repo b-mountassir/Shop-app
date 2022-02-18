@@ -1,14 +1,15 @@
 .product-page__reviews 
     .reviews-header
         h1 Customer reviews
-        = render "reviews/partials/head", reviews: @reviews, average_rating: average_rating, review_count: review_count
+        - if defined?(@average_rating)
+            = render "reviews/partials/head", reviews: @reviews, average_rating: @average_rating, review_count: review_count
 
-        - unless new_review.nil?
+        - if defined?(new_review) && !new_review.nil?
             .review-form
                 = render "reviews/partials/form", new_review: new_review
         
     p.notice = notice
     p.alert = alert 
-    
-    - if reviews      
-        .review-items = render "reviews/partials/reviews", reviews: reviews
+    .reviews-body
+        - if defined?(@reviews)      
+            .review-items = render "reviews/partials/reviews", reviews: @reviews

@@ -1,5 +1,5 @@
 .preview-badge
-    - if average_rating 
+    - if defined?(average_rating) 
         - (1..5).each do |r|
             - if average_rating >= r and (average_rating - (r-1)) > 0.7
                 p.star.star--on 

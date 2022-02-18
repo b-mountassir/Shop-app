@@ -11,6 +11,7 @@
             a.hidden = f.radio_button :rating, r, id: "review_" + dom_id(defined?(@order_item) ? @order_item : item, r), checked: r == 5, class:"star-rating"
     br
     = f.hidden_field :order_item_id, value: new_review.order_item_id
+    = f.hidden_field :dummy_variable, value: current_page?(controller: 'orders') || current_page?(controller:"orders", action: "show")
 
     .field
         .review-body = f.label :body

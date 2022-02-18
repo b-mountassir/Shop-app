@@ -25,10 +25,9 @@ class ReviewsController < ApplicationController
             flash[:error] = "Review failed"
             error = 500
         end
-        render json: {
-            error: "No such user; check the submitted email address",
-            status: "cannot review"
-          }, status: error
+
+        @for_order = review_params[:dummy_variable]
+        puts @for_order
     end
 
     def create_from_email
@@ -62,10 +61,16 @@ class ReviewsController < ApplicationController
         redirect_to product_url(@order_item.product)
     end
     
+    def destroy
+        @review = current_user.reviews.find(params[:id])
+        @review.destroy
+        @review.order_item.update(reviewed_at: nil)
+    end
+
     private
 
     def review_params
-        params.require(:review).permit(:title, :body, :rating, :order_item_id, :authorization_token)
+        params.require(:review).permit(:title, :body, :rating, :order_item_id, :authorization_token, :dummy_variable)
     end
 
     
