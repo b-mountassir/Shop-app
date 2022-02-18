@@ -5,17 +5,16 @@ var modal = (function() {
         $modal,
         $content,
         $close;
-
     // Center the modal in the viewport
     method.center = function() {
         var top, left;
 
-        top = Math.max($(window).height() - $modal.outerHeight(), 0) / 2;
+        top = Math.max($(window).height() - $modal.outerHeight(), 0) / 2 + window.scrollY;
         left = Math.max($(window).width() - $modal.outerWidth(), 0) / 2;
 
         $modal.css({
-            top: top + $(window).scrollTop(),
-            left: left + $(window).scrollLeft(),
+            top: top,
+            left: left,
             zIndex: 99999,
         });
     };
@@ -31,7 +30,6 @@ var modal = (function() {
         $(window).bind('resize.modal', method.center);
         $(document.body).css({
             position: 'fixed',
-            top: `-${window.scrollY}px`,
             width: '-webkit-fill-available'
         })
 
@@ -94,12 +92,12 @@ $(document).ready(function() {
                     modal.open();
                 }
             });
-            e.preventDefault();
         }
+        e.preventDefault();
     });
     $('.edit-product').click(function(e) {
         let dataSlug = $(this).attr('data')
-        let productUrl = 'https://shop-app-mountassir.herokuapp.com/seller/products/' + dataSlug + '/edit'
+        let productUrl = window.location.protocol + "//" + window.location.host + '/seller/products/' + dataSlug + '/edit'
         editProduct();
 
         function editProduct() {
@@ -111,7 +109,7 @@ $(document).ready(function() {
                     modal.open();
                 }
             });
-            e.preventDefault();
         }
+        e.preventDefault();
     });
 });

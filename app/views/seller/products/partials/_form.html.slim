@@ -1,4 +1,9 @@
 .container  
+  h5 
+    - unless current_page?(controller: "seller/products", action:"new")
+      | Edit product
+    - else
+      | Create new product
   = form_with(model: [:seller, @product]) do |form|
     - if @product.errors.any?
       #error_explanation
