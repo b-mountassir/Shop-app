@@ -10,6 +10,8 @@
             = render 'reviews/partials/stars', reviews: review.rating, dummy_variable: reviews
         strong.review_title = review.title 
         .review_content = review.body
+        - if user_signed_in? && review.reviewer == current_user
+            = link_to "Delete review", review_path(review), method: :delete, remote: true, data: { confirm: 'Are you sure?' }
 
     br 
 .pagination 

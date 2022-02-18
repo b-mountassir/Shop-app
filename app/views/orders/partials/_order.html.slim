@@ -6,7 +6,7 @@
             .product_quantity = item.quantity
             - unless item.reviewed_at? 
                 div id = item.product.slug   
-                    = render "reviews/partials/form", new_review: item.product.reviews.new(order_item_id: item.id), item: item
+                    = render "reviews/partials/form", new_review: item.product.reviews.new(order_item_id: item.id), item: item, dummy_variable: item.product.reviews.count
 
             - else 
                 .review-items__item
