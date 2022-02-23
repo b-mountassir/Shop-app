@@ -30,7 +30,8 @@ class Seller::ProductsController < Seller::BaseController
                 format.html { redirect_to(request.referrer || seller_product_path(@product)) }
                 flash[:notice] = "Product was successfully created." 
             else
-                format.html { render :new, status: :unprocessable_entity }
+                format.html { redirect_to(request.referrer) }
+                flash[:notice] = "There was an error creating the product." 
             end
         end
     end
@@ -64,17 +65,14 @@ class Seller::ProductsController < Seller::BaseController
 
     
     def product_params
-        if defined?(@product.published)
-            unless @product.published?
-                params.require(:product).permit(:title, :description, :price, :stock,
-                :product_picture, :published, :on_sale, category_ids: [])
-            else            
-                params.require(:product).permit(:stock, :published, :on_sale)
-            end
-        else
+
+        if params[:id].present? && @product.published?
+            params.require(:product).permit(:stock, :published, :on_sale)
+        else            
             params.require(:product).permit(:title, :description, :price, :stock,
-                :product_picture, :published, :on_sale, category_ids: [])
+            :product_picture, :published, :on_sale, category_ids: [])
         end
+    
     end
     
 end
