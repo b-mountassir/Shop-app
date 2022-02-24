@@ -1,0 +1,67 @@
+.login-card {
+    width: 641px;
+    background: #d19c974d;
+    backdrop-filter: blur(30px);
+    border-radius: 40px;
+}
+
+.login-fields {
+    margin: 120px;
+}
+
+h2.title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 38px;
+    line-height: 46px;
+}
+
+.login-field__label {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+input#user_login,
+input#user_password {
+    background: #FFFFFF;
+    border-radius: 5px;
+    width: 400px;
+    height: 50px;
+    border: none;
+}
+
+input#user_login {
+    margin-bottom: 32px;
+}
+
+h2.title {
+    margin-bottom: 28px;
+}
+
+input#user_password {
+    margin-bottom: 17px;
+}
+
+input.btn.login-field__btn,
+a.login-field__signup.btn {
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    height: 50px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 1.7;
+    color: white;
+    margin: 5px;
+}
+
+input.btn.login-field__btn {
+    background: #d19c97;
+}
+
+a.login-field__signup.btn {
+    background: aquamarine;
+}

@@ -13,7 +13,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    resource.add_role(params[:user][:roles])
+    
+    unless params[:user][:roles] == "admin"
+      resource.add_role(params[:user][:roles])
+    else
+      resource.add_role(:buyer)
+    end
   end
 
   # GET /resource/edit
@@ -25,7 +30,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     super
     unless resource.has_role? :admin
-      resource.update(roles: [Role.find_by(name: params[:user][:roles])])
+      unless params[:user][:roles] == "admin"
+        resource.update(roles: [Role.find_by(name: params[:user][:roles])])
+      else
+        resource.update(roles: [Role.find_by(name: "buyer")])
+      end
     end
   end
   
