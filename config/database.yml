@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: ShopApp_production
-  username: ShopApp
+  username: <%= ENV['SHOPAPP_DATABASE_USERNAME'] %>
   password: <%= ENV['SHOPAPP_DATABASE_PASSWORD'] %>

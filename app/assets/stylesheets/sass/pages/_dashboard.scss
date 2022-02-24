@@ -1,0 +1,22 @@
+.heading {
+    text-align: center;
+}
+
+.users-table {
+    margin: 10px auto;
+    width: 100%;
+}
+
+.users-table .table-heading {
+    background-color: #D19C97;
+    color: #FFFFFF;
+}
+
+.users-table .table-heading th,
+.users-table tr td {
+    padding: 0 20px;
+}
+
+table.users-table tr {
+    line-height: 2.5;
+}

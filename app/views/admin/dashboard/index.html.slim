@@ -1,16 +1,43 @@
 .container
     h1 Admin dasboard 
 
-    = link_to "New category", new_admin_category_path
 
-    h2 Users
+    .users
+        h2.heading Users
 
-    table 
-        tr
-            th Emails
-            th Roles
+        table.users-table
+            tr.table-heading
+                th Emails
+                th Roles
 
-        - @users.each do |user|
-            tr
-                td = user.email
-                td = user.roles.first.name
+            - @users.each do |user|
+                tr
+                    td = user.email
+                    td = user.roles.first.name
+
+    .categorie
+        h2.heading Categories
+
+        = link_to "New category", new_admin_category_path
+        table.users-table
+            tr.table-heading
+                th Name
+                th Product count
+                th Delete
+
+            - @categories.each do |category|
+                tr
+                    td = category.name
+                    td = category.products.count
+                    td = link_to "Delete category", admin_category_path(category), method: :delete
+
+    .metrics    
+        h2.heading Metrics
+        .metric-charts
+            .metrics-container    
+                canvas id="myChart" width="444px" height="444px" data-colors="#{@data_colors}" data-labels="#{@data_keys}" data-data="#{@data_values}"
+                .label Gross income by category in dollars
+            .metrics-container    
+                canvas id="myChart1" width="444px" height="444px" data-labels="#{@data_keys_daily_orders}" data-data="#{@data_values_daily_orders}"
+                .label Daily income in dollars
+
