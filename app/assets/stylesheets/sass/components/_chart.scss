@@ -1,0 +1,18 @@
+@media screen and (min-width:767px) {
+    .metrics-container {
+        max-width: 40%;
+    }
+    .metric-charts {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.metrics-container .label {
+    text-align: center;
+    margin-block: 40px;
+}
+
+.metrics-container {
+    margin-block: 40px;
+}

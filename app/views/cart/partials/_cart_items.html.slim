@@ -12,8 +12,8 @@
           .item-row.p-3
             .cell.align-middle = item.product.title
             .cell.align-middle = item.product.price
-            .cell.align-middle = item.total  
             = render 'cart/partials/update_cart_item_form', item: item, class: "align-middle"
+            .cell.align-middle = item.total  
             .cell.align-middle
               = link_to item, method: :delete, remote: true, class: "btn btn-sm btn-primary" do
                 i.fa.fa-times
