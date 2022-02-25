@@ -37,11 +37,11 @@ class ReviewsController < ApplicationController
         user = User.find(jwt_data.first.first[1])
         if !user 
             flash[:error] = "Unauthorized"
-            redirect_to(request.referrer || root_url) and return
+            redirect_to(root_url) and return
         end
         if @order_item.nil? 
             flash[:error] = "Review failed"
-            redirect_to(request.referrer || root_url) and return
+            redirect_to(root_url) and return
         end
         @review =  Review.new(
             title: review_params[:title],
