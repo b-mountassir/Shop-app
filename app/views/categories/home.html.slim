@@ -11,6 +11,8 @@ h1.page-title ShopApp
                         .card-header.product-img.position-relative.overflow-hidden.bg-transparent.border.p-0
                             - if product.product_picture.attached?
                                 image.img-fluid.w-100.p-4 src = url_for(product.product_picture)
+                            - else
+                                = image_tag "images.jpg", class: "img-fluid w-100 p-4 "
                         .card-body.border-left.border-right.text-center.p-0.pt-2.pb-1
                             = product.title
                             .vendor-name = product.seller.first_name

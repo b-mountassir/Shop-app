@@ -10,6 +10,8 @@
                             .card-header.product-img.text-center.position-relative.overflow-hidden.bg-transparent.border.p-0
                                 - if product.product_picture.attached?
                                     image.img-fluid.w-75 src = url_for(product.product_picture)
+                                - else
+                                    = image_tag "images.jpg", class: "img-fluid w-100 p-4 "
                             .card-body.border-left.border-right.text-center.p-0.pt-4.pb-3
                                 = product.title
                                 .vendor-name = product.seller.first_name
