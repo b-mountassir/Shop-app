@@ -36,11 +36,12 @@ class ReviewsController < ApplicationController
         jwt_data = JWT.decode review_params[:authorization_token], ENV['SECRET_KEY'], true, { algorithm: 'HS256'}
         user = User.find(jwt_data.first.first[1])
         if !user 
-            flash[:error] = "Unauthorized"
+            flash[:alert] = "Unauthorized"
+
             redirect_to(root_url) and return
         end
         if @order_item.nil? 
-            flash[:error] = "Review failed"
+            flash[:alert] = "Review failed"
             redirect_to(root_url) and return
         end
         @review =  Review.new(
