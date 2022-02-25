@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
     skip_before_action :verify_authenticity_token
-    before_action :authenticate_user!
+    before_action :authenticate_user!, only: [:create]
     error = 201
     def create
         # check order item belongs to user???
