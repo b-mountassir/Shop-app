@@ -34,7 +34,7 @@ class ReviewsController < ApplicationController
         # check order item belongs to user???
         @order_item = OrderItem.find_by(id: review_params[:order_item_id], reviewed_at: nil)
         jwt_data = JWT.decode review_params[:authorization_token], ENV['SECRET_KEY'], true, { algorithm: 'HS256'}
-        user = User.find(jwt_data.first.values.first)
+        user = User.find(jwt_data.first.first.values.first)
         if !user 
             flash[:error] = "Unauthorized"
             redirect_to(request.referrer || root_url) and return
