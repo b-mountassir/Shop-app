@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Open Sans;
+    background-color: #f9f9f9 !important;
 }
 
 .container {
@@ -11,4 +12,28 @@ body {
 
 .page-title {
     text-align: center;
+}
+
+.text-primary {
+    color: var(--btn-primary-color) !important;
+}
+
+a.text-primary:hover,
+a.text-primary:focus {
+    color: #ba6a62 !important;
+}
+
+.invisible {
+    height: 25px;
+}
+
+h1.m-0.display-5.font-weight-semi-bold,
+h1.font-weight-semi-bold.text-uppercase.mb-3,
+h4.font-weight-semi-bold.m-0,
+.text-dark {
+    color: white !important;
+}
+
+.nav-link {
+    font-weight: 700;
 }

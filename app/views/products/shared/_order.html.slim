@@ -5,11 +5,11 @@
                 = f.hidden_field  :product_id, value: product.id
                 .input-group.quantity.mr-3 style="width: 130px;"
                     .input-group-btn
-                        button.btn.btn-primary.btn-minus type="button"
+                        button.btn.btn-secondary.btn-minus type="button"
                             .fa.fa-minus
                     = f.text_field  :quantity, value:  1, class: "form-control bg-secondary text-center"
                     .input-group-btn
-                        button.btn.btn-primary.btn-plus type="button"
+                        button.btn.btn-secondary.btn-plus type="button"
                             .fa.fa-plus
                 = f.button :submit, value:"Add product to cart", class: "btn btn-primary px-3" do 
                     i.fa.fa-shopping-cart.mr-1  

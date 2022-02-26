@@ -75,7 +75,7 @@
               - unless resource.has_role? :admin
                 - Role.where.not(name: "admin").each do |role|
                   = f.radio_button :roles, role.name, id: "user_" + role.name, checked: role.name == current_user.roles.first.name
-                  = f.label role.name
+                  .d-none = f.label role.name
                   br
               - else
                 h4 ADMIN

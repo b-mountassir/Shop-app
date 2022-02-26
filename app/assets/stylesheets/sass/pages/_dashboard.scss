@@ -8,8 +8,8 @@
 }
 
 .users-table .table-heading {
-    background-color: #D19C97;
-    color: #FFFFFF;
+    color: var(--btn-primary-color);
+    background-color: var(--btn-secondary-color);
 }
 
 .users-table .table-heading th,
