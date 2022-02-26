@@ -3,7 +3,7 @@ h1.page-title Categories
     .row.px-xl-5.pb-3
         - @categories.each do |category|
             .col-lg-4.col-md-6.pb-1 
-                .cat-item.d-flex.flex-column.border.mb-4
+                .cat-item.d-flex.flex-column.border.card.mb-4
                     = link_to category_products_path(category.slug) do
                         - if category.category_picture.attached?
                             .cat-img.position-relative.overflow-hidden.mb-3

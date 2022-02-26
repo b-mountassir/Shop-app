@@ -1,69 +1,61 @@
-= render "devise/shared/error_messages", resource: resource
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  .container.rounded.mt-5.mb-5
-    .row
-      .col-md-5.border-right
-        .p-3.py-5
-          .d-flex.justify-content-between.align-items-center.mb-3
-            h4.text-right Sign up
+.login-page 
+  .signup-card
+    .login-fields
+      = render "devise/shared/error_messages", resource: resource
+      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        .container.rounded.mt-5.mb-5.w25.pb-5
+            .d-flex.justify-content-between.align-items-center.mb-3
+              h2.title.pt-5 Sign up
 
-        .row.mt-2
-          .col-md-6
-            = f.label :first_name, "Name", class: "labels"
-            br
-            = f.text_field :first_name, autofocus: true
+            .row.mt-2
+              .col-md-6
+                = f.label :first_name, "Name", class: "labels"
+                = f.text_field :first_name, autofocus: true
 
-          .col-md-6
-            = f.label :last_name, "Surname", class: "labels"
-            br
-            = f.text_field :last_name, autofocus: true
-        
-        .row.mt-3
-          .col-md-12
-            = f.label :username, class: "labels"
-            br
-            = f.text_field :username, autofocus: true
-          
-          .col-md-12
-            = f.label :email, class: "labels"
-            br
-            = f.email_field :email, autofocus: true, autocomplete: "email"
+              .col-md-6
+                = f.label :last_name, "Surname", class: "labels"
+                = f.text_field :last_name, autofocus: true
+            
+            .row.mt-3
+              .col-md-12
+                = f.label :username, class: "labels"
+                = f.text_field :username, autofocus: true
+              
+              .col-md-12
+                = f.label :email, class: "labels"
+                = f.email_field :email, autofocus: true, autocomplete: "email"
 
-          - if devise_mapping.confirmable? && resource.pending_reconfirmation? 
-            div Currently waiting confirmation for: 
-              = resource.unconfirmed_email
+              - if devise_mapping.confirmable? && resource.pending_reconfirmation? 
+                div Currently waiting confirmation for: 
+                  = resource.unconfirmed_email
 
-          .col-md-12
-            = f.label :password, class: "labels"  
-            br
-            = f.password_field :password, autocomplete: "new-password" 
-            - if @minimum_password_length 
-              br
-              em = @minimum_password_length 
-              |  characters minimum
-          
+              .col-md-12
+                = f.label :password, class: "labels"  
+                = f.password_field :password, autocomplete: "new-password" 
+                - if @minimum_password_length 
+                  br
+                  em = @minimum_password_length 
+                  |  characters minimum
+              
 
-          .col-md-12
-            = f.label :password_confirmation, class: "labels" 
-            br
-            = f.password_field :password_confirmation, autocomplete: "new-password" 
-          
+              .col-md-12
+                = f.label :password_confirmation, class: "labels" 
+                = f.password_field :password_confirmation, autocomplete: "new-password" 
+                
 
-          
-      .col-md-4
-        .p-3.py-5
-          .d-flex.justify-content-between.align-items-center.experience
-            span Edit role
-            span.border.px-3.p-1
-              = f.label :roles, "I am a:"
-              br
-              - Role.where.not(name: "admin").each do |role|
-                = f.radio_button :roles, role.name, id: "user_" + role.name, checked: role.name == "buyer"
-                = f.label role.name
-                br
+                
+            
+            .p-3.py-5
+              .experience
+                span.px-3.p-1
+                  = f.label :roles, "I am a:"
+                .d-flex.justify-content-between.pt-4
+                  - Role.where.not(name: "admin").each do |role|
+                    = f.radio_button :roles, role.name, id: "user_" + role.name, checked: role.name == "buyer"
+                      = f.label role.name
 
-         
-        .actions
-          = f.submit "Sign up", class:"btn btn-primary profile-button"
+              
+            .actions
+              = f.submit "Sign up", class:"btn btn-primary login-field__btn"
 
-        = render "devise/shared/links"
+            = render "devise/shared/links"

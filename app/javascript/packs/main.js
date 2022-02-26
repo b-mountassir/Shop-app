@@ -5,7 +5,7 @@
     $(document).ready(function() {
         function toggleNavbarMethod() {
             if ($(window).width() > 992) {
-                $('.navbar .dropdown').on('mouseover', function() {
+                $('.nav-item.dropdown').on('mouseover', function() {
                     $('.dropdown-menu').toggleClass('show');
                 }).on('mouseout', function() {
                     $('.dropdown-menu').toggleClass('show');
@@ -17,6 +17,8 @@
         toggleNavbarMethod();
         $(window).resize(toggleNavbarMethod);
     });
+
+
 
     let page = document.location.pathname;
     $(".nav-item.nav-link").map(function() {

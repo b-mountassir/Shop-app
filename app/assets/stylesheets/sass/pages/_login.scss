@@ -1,12 +1,36 @@
-.login-card {
-    width: 641px;
-    background: #d19c974d;
-    backdrop-filter: blur(30px);
-    border-radius: 40px;
+@media (min-width: 768px) {
+    .signup-card,
+    .login-card {
+        width: 641px !important;
+        border-radius: 40px;
+    }
+    .login-fields {
+        margin: 120px !important;
+        text-align: unset !important;
+    }
+    input#user_login,
+    input#user_password,
+    input#user_username,
+    input#user_email,
+    input#user_password_confirmation {
+        width: 400px;
+    }
 }
 
 .login-fields {
-    margin: 120px;
+    margin: 12px;
+    text-align: center;
+}
+
+.login-card,
+.signup-card {
+    background: var(--btn-secondary-color);
+    backdrop-filter: blur(30px);
+    width: 100%;
+}
+
+.signup-card *:not(input) {
+    color: white;
 }
 
 h2.title {
@@ -14,6 +38,7 @@ h2.title {
     font-weight: bold;
     font-size: 38px;
     line-height: 46px;
+    color: var(--btn-primary-color);
 }
 
 .login-field__label {
@@ -21,15 +46,29 @@ h2.title {
     font-weight: normal;
     font-size: 14px;
     line-height: 16px;
+    color: white;
 }
 
 input#user_login,
-input#user_password {
+input#user_password,
+input#user_username,
+input#user_email,
+input#user_password_confirmation {
     background: #FFFFFF;
     border-radius: 5px;
-    width: 400px;
     height: 50px;
     border: none;
+    display: block;
+}
+
+input#user_first_name,
+input#user_last_name {
+    background: #FFFFFF;
+    border-radius: 5px;
+    height: 50px;
+    border: none;
+    display: block;
+    width: 100%;
 }
 
 input#user_login {
@@ -45,7 +84,8 @@ input#user_password {
 }
 
 input.btn.login-field__btn,
-a.login-field__signup.btn {
+a.login-field__signup.btn,
+a.btn.login-field__btn {
     width: 100%;
     border-radius: 5px;
     border: none;
@@ -59,9 +99,77 @@ a.login-field__signup.btn {
 }
 
 input.btn.login-field__btn {
-    background: #d19c97;
+    background: var(--btn-primary-color);
 }
 
 a.login-field__signup.btn {
     background: aquamarine;
+}
+
+img.profile-picture {
+    border-radius: 99px;
+    width: 57px;
+}
+
+a.login-field__reset-password {
+    color: white;
+    display: block;
+    text-align: center;
+}
+
+.login-card,
+.signup-card {
+    margin: 0 auto;
+}
+
+a.btn.login-field__btn {
+    background: var(--btn-secondary-color)
+}
+
+input#user_buyer:checked::after {
+    content: "Buyer";
+    background: var(--btn-primary-color);
+    padding: 10px 20px;
+    border-radius: 7px;
+    color: var(--btn-secondary-color);
+    border: 1px solid var(--btn-secondary-color);
+}
+
+input#user_buyer::after {
+    content: "Buyer";
+    background: transparent;
+    padding: 10px 20px;
+    border-radius: 7px;
+    color: var(--btn-secondary-color);
+}
+
+input#user_seller:checked::after {
+    content: "Seller";
+    background: var(--btn-primary-color);
+    padding: 10px 20px;
+    border-radius: 7px;
+    color: var(--btn-secondary-color);
+    border: 1px solid var(--btn-secondary-color);
+}
+
+input#user_seller::after {
+    content: "Seller";
+    background: transparent;
+    padding: 10px 20px;
+    border-radius: 7px;
+    color: var(--btn-secondary-color);
+}
+
+input#user_buyer {
+    display: block;
+    height: 50px;
+    width: 82px;
+    appearance: none;
+}
+
+input#user_seller {
+    appearance: none;
+    display: block;
+    height: 42px;
+    width: 82px;
 }
