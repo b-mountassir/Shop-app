@@ -1,4 +1,4 @@
-$('.star').on('click', function(e) {
+$('label.star').on('click', function(e) {
     $(this).prevAll().addClass("star--on")
     $(this).prevAll().removeClass("star--off")
     $(this).nextAll().removeClass("star--on")
