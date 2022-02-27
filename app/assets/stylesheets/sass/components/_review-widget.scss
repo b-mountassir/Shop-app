@@ -4,16 +4,10 @@
 
 .product-page__reviews {
     padding: 5px;
-    border: 1px solid lightgray;
-}
-
-.review-items__item {
-    border: 1px solid lightgray;
 }
 
 .review-form {
     padding: 1rem;
-    border: 1px solid lightgray;
 }
 
 .product-page__reviews {
@@ -31,4 +25,38 @@
 textarea#review_body {
     width: 98%;
     height: 90px;
+}
+
+.submit-review {
+    padding: 5px 1rem !important;
+    font-weight: 900 !important;
+    color: #fff !important;
+    border-radius: 10px !important;
+}
+
+textarea#review_body,
+input#review_title {
+    border: 1px solid;
+    border-radius: 15px;
+}
+
+textarea#review_body:focus,
+input#review_title:focus {
+    border: 1px solid var(--btn-secondary-color);
+}
+
+.new_review .field:not(.field:last-child) {
+    padding-top: 25px;
+}
+
+.new_review .field:last-child {
+    text-align: center;
+}
+
+input.btn.btn-primary.submit-review.border-none {
+    padding-inline: 40px !important;
+}
+
+.new_review label {
+    font-weight: 700;
 }

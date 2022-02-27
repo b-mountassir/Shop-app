@@ -7,15 +7,15 @@
         strong.cell Quantity
         strong.cell Total
         strong.cell Remove
-      .cart-items.align-middle
+      .cart-items.align-middle.bg-white
         - order_items.each do |item|
           .item-row.p-3
             .cell.align-middle = item.product.title
-            .cell.align-middle = item.product.price
+            .cell.align-middle = number_to_currency item.product.price
             = render 'cart/partials/update_cart_item_form', item: item, class: "align-middle"
-            .cell.align-middle = item.total  
+            .cell.align-middle = number_to_currency item.total  
             .cell.align-middle
-              = link_to item, method: :delete, remote: true, class: "btn btn-sm btn-primary" do
+              = link_to item, method: :delete, remote: true, class: "btn btn-sm btn-primary " do
                 i.fa.fa-times
       - if @order_items.length > 0
         span.cart__empty
@@ -24,24 +24,24 @@
     
     
     .col-lg-4 
-      .border.mb-5
+      .mb-5
         .card-header.bg-secondary.border-0
             h4.font-weight-semi-bold.m-0 Cart Summary
         
-        .card-body
+        .card-body.bg-white
             .d-flex.justify-content-between.mb-3.pt-1
                 h6.font-weight-medium Subtotal
-                h6.font-weight-medium = current_order.subtotal
+                h6.font-weight-medium = number_to_currency current_order.subtotal
             
             .d-flex.justify-content-between
                 h6.font-weight-medium Shipping
                 h6.font-weight-medium $0
             
         
-        .card-footer.border-secondary.bg-transparent
+        .card-footer.bg-white
             .d-flex.justify-content-between.mt-2
                 h5.font-weight-bold Total
-                h5.font-weight-bold = current_order.subtotal
+                h5.font-weight-bold = number_to_currency current_order.subtotal
             - if order_items.length > 0
               = link_to "Proceed to checkout", orders_path, method: :post, class: 'btn btn-block btn-primary my-3 py-3 order__confirm'
     

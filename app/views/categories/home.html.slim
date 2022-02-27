@@ -7,12 +7,12 @@
                     .col-lg-2.col-md-6.col-sm-12.pb-1
                         .card.product-item.border-0.mb-4
                             = link_to defined?(@category) ? category_product_path(params[:category_id], id: product.slug) : product_path(id: product.slug) do
-                                .card-header.product-img.position-relative.overflow-hidden.bg-transparent.border.p-0
+                                .card-header.product-img.position-relative.overflow-hidden.bg-transparent.border-bottom.p-0
                                     - if product.product_picture.attached?
                                         image.img-fluid.w-100.p-4 src = url_for(product.product_picture)
                                     - else
                                         = image_tag "images.jpg", class: "img-fluid w-100 p-4 "
-                                .card-body.border-left.border-right.text-center.p-0.pt-2.pb-1
+                                .card-body.text-center.p-0.pt-2.pb-1
                                     = product.title
                                     .vendor-name = product.seller.first_name
                                     br
@@ -22,6 +22,6 @@
                                         reviews: product.reviews.collect { |review| review.rating }.sum / product.reviews.count.to_f
                                     .d-flex.justify-content-center.product-price
                                             = number_to_currency product.price
-                            .card-footer.d-flex.justify-content-center.bg-light.border
+                            .card-footer.d-flex.justify-content-center.bg-light.border-top
                                 = render "products/shared/order", product: product
 = javascript_pack_tag "cart_quantity"

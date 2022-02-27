@@ -19,9 +19,8 @@ a:hover {
 }
 
 a.btn.btn-primary {
-    color: black;
-    background: white;
-    border: 1px solid;
+    color: white;
+    background: var(--btn-primary-color);
 }
 
 .btn-primary {
@@ -64,7 +63,7 @@ a.btn.btn-primary {
 }
 
 .btn-secondary {
-    color: #212529;
+    color: white !important;
     background-color: var(--btn-secondary-color) !important;
     border-color: var(--btn-secondary-color);
 }
