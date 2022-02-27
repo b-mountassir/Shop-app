@@ -3,7 +3,7 @@
         .review-title = f.label :title
         .review-title__field = f.text_field :title
 
-    .field 
+    .field
         = f.label :rating   
     span.star-field 
         - (1..5).each do |r|
@@ -18,4 +18,4 @@
         .review-body__field = f.text_area :body
     br
     .field 
-        = f.submit :create, value: "Submit"
+        = f.submit :create, value: "Submit", class: "btn btn-primary submit-review border-none"

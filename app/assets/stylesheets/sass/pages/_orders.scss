@@ -1,13 +1,25 @@
-.order-line__items {
+.order-item {
     display: grid;
+    grid-template-columns: repeat(3, 1fr);
     width: 100%;
-    justify-content: space-between;
-    grid-template-columns: repeat(4, 1fr);
+    flex-flow: wrap;
     gap: 1rem;
+}
+
+.order-item__id {
+    grid-column: 1/2;
+}
+
+.order-review {
+    grid-column: 1/4;
 }
 
 .product_title {
     grid-column: 2/3;
+}
+
+.product_quantity {
+    grid-column: 3/4;
 }
 
 h1.order__confirm {
@@ -19,4 +31,14 @@ h1.order__confirm {
     grid-template-columns: repeat(4, 1fr);
     justify-content: space-between;
     gap: 1rem;
+}
+
+a.m-0.p-3.text-center.review-purchases {
+    background-color: var(--btn-primary-color);
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+a.m-0.p-3.text-center.review-purchases {
+    grid-column: 2/3;
 }

@@ -1,9 +1,4 @@
 .container
     h3 Your Orders
-    .table-headers 
-        span #Order id: 
-        span Product title: 
-        span Quantity
-        span Review
     - @orders.each do |items|
-        = render "orders/partials/order", items: items
+        .card.mt-3.p-3 = render "orders/partials/order", items: items

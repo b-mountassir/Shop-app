@@ -1,18 +1,32 @@
 .order-line
     .order-line__items 
-        .order_id = link_to items.id, order_path(items)
+        h2.order_id.text-center
+            strong Order ID 
+            = link_to items.id, order_path(items)
         - items.order_items.each do |item|
-            .product_title = link_to item.product.title, product_path(item.product)
-            .product_quantity = item.quantity
-            - unless item.reviewed_at? 
-                div id = item.product.slug   
-                    = render "reviews/partials/form", new_review: item.product.reviews.new(order_item_id: item.id), item: item, dummy_variable: item.product.reviews.count
-
-            - else 
-                .review-items__item
-                    .review_timestamp 
-                        = item.product.reviews.find_by(reviewer_id: current_user.id).created_at.strftime("%Y/%m/%d at %H:%M")
-                    .review_rating 
-                        = render 'reviews/partials/stars', reviews: item.product.reviews.find_by(reviewer_id: current_user.id).rating, dummy_variable: item.product.reviews.count
-                    strong.review_title = item.product.reviews.find_by(reviewer_id: current_user.id).title 
-                    .review_content = item.product.reviews.find_by(reviewer_id: current_user.id).body
+            .order-item.pt-4
+                .order-item__id 
+                    strong Order item: 
+                    = item.id.to_s
+                .product_title 
+                    strong Product Name: 
+                    = link_to item.product.title, product_path(item.product)
+                .product_quantity 
+                    strong Quantity: 
+                    = item.quantity
+                - if item.reviewed_at? 
+                    h5.m-0.mt-3.font-weight-bold Your review
+                    .order-review.review-items__item
+                        .review_timestamp 
+                            = item.product.reviews.find_by(reviewer_id: current_user.id).created_at.strftime("%Y/%m/%d at %H:%M")
+                        .review_rating 
+                            = render 'reviews/partials/stars', reviews: item.product.reviews.find_by(reviewer_id: current_user.id).rating, dummy_variable: item.product.reviews.count
+                        strong.review_title = item.product.reviews.find_by(reviewer_id: current_user.id).title 
+                        .review_content = item.product.reviews.find_by(reviewer_id: current_user.id).body
+                - else
+                    a.m-0.p-3.text-center.review-purchases data-toggle="collapse" data-target="#{"#" + item.product.slug + "-" + item.id.to_s}"    
+                        h5.d-inline Review your purchased product   
+                        i.fa.fa-angle-down.ml-2
+                    .order-review id = item.product.slug
+                        div.collapse id = "#{item.product.slug + "-" + item.id.to_s}"
+                            = render "reviews/partials/form", new_review: item.product.reviews.new(order_item_id: item.id), item: item, dummy_variable: item.product.reviews.count

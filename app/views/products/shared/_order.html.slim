@@ -12,9 +12,7 @@
                         button.btn.btn-secondary.btn-plus type="button"
                             .fa.fa-plus
                 = f.button :submit, value:"Add product to cart", class: "btn btn-primary px-3" do 
-                    i.fa.fa-shopping-cart.mr-1  
-                    - unless @home_page
-                        | Add product to cart 
+                    i.fa.fa-shopping-cart.mr-1 
     - elsif product.stock == 0
         br
         | Out of stock

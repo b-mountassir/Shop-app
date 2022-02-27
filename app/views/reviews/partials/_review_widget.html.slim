@@ -1,15 +1,13 @@
-.product-page__reviews 
-    .reviews-header
-        h1 Customer reviews
-        - if defined?(@average_rating)
-            = render "reviews/partials/head", reviews: @reviews, average_rating: @average_rating, review_count: review_count
-
+.product-page__reviews.p-0
+    .reviews-header.p-0
         - if defined?(new_review) && !new_review.nil?
-            .review-form
+            h2 Share your review with others
+            .review-form.cards.pt-3.mt-3
                 = render "reviews/partials/form", new_review: new_review
-        
-    p.notice = notice
-    p.alert = alert 
+        - if defined?(@average_rating)
+            h2.pt-5.mt-5 Product reviews
+            .mb-3 = render "reviews/partials/head", reviews: @reviews, average_rating: @average_rating, review_count: review_count
+
     .reviews-body
         - if defined?(@reviews)      
-            .review-items = render "reviews/partials/reviews", reviews: @reviews
+            .review-items.p-0 = render "reviews/partials/reviews", reviews: @reviews
