@@ -12,8 +12,8 @@ import "channels"
 import 'trix/dist/trix.css';
 
 
-$(document).on("click", () => {
-    if ($(".nav-link[data-toggle='collapse']").attr('aria-expanded') === "true") {
+$(document).on("click", (e) => {
+    if ($(".nav-link[data-toggle='collapse']").attr('aria-expanded') === "true" && !e.target.className.includes("nav-item")) {
         $('.collapse').collapse('hide');
     }
 })

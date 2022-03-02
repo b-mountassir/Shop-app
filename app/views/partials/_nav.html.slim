@@ -64,7 +64,17 @@
                     h1.m-0.display-5.font-weight-semi-bold
                         span.text-primary.font-weight-bold Shop
                         span.text-secondary App
-                button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarCollapse" aria-expanded="false"
+                button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarCollapsed" aria-expanded="false"
                     span.navbar-toggler-icon
+                div.d-sm-none.justify-content-between.collapse.w-100#navbarCollapsed
+                    = link_to "Home", root_path, class: "nav-item nav-link"
+                    a.nav-item.nav-link data-toggle="collapse" data-target="#navbar-vertical" aria-controls="navbar-vertical"
+                        | Categories
+                        i.fa.fa-angle-down.ml-2
+                    div.collapse.navbar.navbar-vertical.navbar-light.align-items-start.p-0.border.border-top-0.border-bottom-0.bg-light#navbar-vertical
+                        .navbar-nav.w-100.overflow-hidden
+                            = link_to "All categories", categories_path, class: "nav-item nav-link"
+                            - @categoies_nav.each do |category|
+                                = link_to category.name, category_products_path(category), class: "nav-item nav-link"
                 
 
