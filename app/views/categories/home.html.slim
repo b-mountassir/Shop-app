@@ -11,15 +11,16 @@
                                     - if product.product_picture.attached?
                                         image.img-fluid.w-100.p-4 src = url_for(product.product_picture)
                                     - else
-                                        = image_tag "images.jpg", class: "img-fluid w-100 p-4 "
+                                        = image_tag "images.png", class: "img-fluid w-100 p-4 "
                                 .card-body.text-center.p-0.pt-2.pb-1
                                     = product.title
                                     .vendor-name = product.seller.first_name
-                                    br
                                     - if product.reviews.count > 0
                                         = render 'reviews/partials/stars',
                                         product_reviews_count: product.reviews.count,
                                         reviews: product.reviews.collect { |review| review.rating }.sum / product.reviews.count.to_f
+                                    - else
+                                        .invisible preview-badge
                                     .d-flex.justify-content-center.product-price
                                             = number_to_currency product.price
                             .card-footer.d-flex.justify-content-center.bg-light.border-top
