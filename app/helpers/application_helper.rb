@@ -3,17 +3,13 @@ module ApplicationHelper
 
     def current_order
         if current_user
-          unless cookies.has_key?("cart")
-            exist_cart = Order.find_by(user_id: current_user.id, status: "cart") 
-          else 
-            cookie_order = Order.find(cookies[:cart])
-            puts cookie_order.status
-            if cookie_order.status == "cart"
-              cookie_order.update(user_id: current_user.id)
-              exist_cart = cookie_order
-              flash[:notice] = "your old cart"
-            end
+          if cookies.has_key?("cart") && Order.find(cookies[:cart]).user != current_user
+            cookie_order = Order.where(status: "cart").find(cookies[:cart])
+            cookie_order.update(user_id: current_user.id)
+            exist_cart = cookie_order
+            flash[:notice] = "your old cart"
           end
+          exist_cart = Order.find_by(user_id: current_user.id, status: "cart") 
           if exist_cart.nil?
             Order.create(user_id: current_user.id, status: "cart")
           else
