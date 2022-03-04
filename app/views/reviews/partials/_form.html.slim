@@ -1,4 +1,4 @@
-= form_for new_review, remote: true do |f|
+= form_for defined?(new_review) ? new_review : @review do |f|
     .field
         .review-title = f.label :title
         .review-title__field = f.text_field :title
@@ -7,10 +7,10 @@
         = f.label :rating   
     span.star-field 
         - (1..5).each do |r|
-            = f.label dom_id(defined?(@order_item) ? @order_item : item, r), :" ", class: "star star--on"
-            a.hidden = f.radio_button :rating, r, id: "review_" + dom_id(defined?(@order_item) ? @order_item : item, r), checked: r == 5, class:"star-rating"
+            = f.label dom_id(defined?(@order_item) ? @order_item : defined?(item) ? item : @review, r), :" ", class: "star star--on"
+            a.hidden = f.radio_button :rating, r, id: "review_" + dom_id(defined?(@order_item) ? @order_item : defined?(item) ? item : @review, r), checked: r == 5, class:"star-rating"
     br
-    = f.hidden_field :order_item_id, value: new_review.order_item_id
+    = f.hidden_field :order_item_id, value: defined?(new_review) ? new_review.order_item_id : @review.order_item_id
     = f.hidden_field :dummy_variable, value: current_page?(controller: 'orders') || current_page?(controller:"orders", action: "show")
 
     .field

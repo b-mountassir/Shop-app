@@ -1,6 +1,6 @@
 - reviews.each do |review|
 
-    .review-items__item.cards.mt-0
+    div.review-items__item.cards.mt-0 {id = (review.id.to_s + review.reviewer.username.to_s)}
         .reviewer_name 
             h4 = review.reviewer.first_name
         .review_timestamp 
@@ -10,6 +10,7 @@
         strong.review_title = review.title 
         .review_content = review.body
         - if user_signed_in? && review.reviewer == current_user
+            = link_to "Edit review ", edit_review_path(review), remote: true
             = link_to "Delete review", review_path(review), method: :delete, remote: true, data: { confirm: 'Are you sure?' }
 
     br 

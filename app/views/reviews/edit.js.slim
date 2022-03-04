@@ -1,0 +1,5 @@
+| $("#
+= (@review.id.to_s + @review.reviewer.username.to_s)
+| ").html("
+= j render("reviews/partials/form", locals: {new_review: Review.find(params[:id])} ) 
+| ")

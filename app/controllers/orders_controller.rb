@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_user!, only: [:create]
     def create
       # # take snapshot
       # current_order.order_items.each do |order_item|
