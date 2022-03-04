@@ -3,7 +3,7 @@ class OrderItem < ApplicationRecord
     before_save :set_total
     belongs_to :seller_order, optional: true
     validates :quantity, numericality: { greater_than: 0 }
-    belongs_to :user
+    belongs_to :user, optional: true
     belongs_to :order
     belongs_to :product
     

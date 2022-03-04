@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
     before_save :set_subtotal
     
-    belongs_to :user
+    belongs_to :user, optional: true
     has_many :order_items
 
     enum status: { cart: 0, ordered: 1, paid: 2}

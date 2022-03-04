@@ -25,9 +25,6 @@ class ReviewsController < ApplicationController
             flash[:error] = "Review failed"
             error = 500
         end
-
-        @for_order = review_params[:dummy_variable]
-        puts @for_order
     end
 
     def create_from_email
@@ -62,6 +59,23 @@ class ReviewsController < ApplicationController
         redirect_to product_url(@order_item.product)
     end
     
+    def edit
+        @review = current_user.reviews.find(params[:id])
+        new_review = @review
+    end
+
+    def update 
+        @review = current_user.reviews.find(params[:id])
+        respond_to do |format|
+            if @review.update(review_params.except(:dummy_variable))
+                format.html { redirect_to(request.referrer) }
+                flash[:notice] = "Review was successfully updated." 
+            else
+                format.html { render :edit, status: :unprocessable_entity }
+            end
+        end
+    end
+
     def destroy
         @review = current_user.reviews.find(params[:id])
         @review.destroy

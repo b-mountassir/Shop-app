@@ -53,8 +53,7 @@
             .btn
                 = link_to cart_path do
                     i.fa.fa-shopping-cart.text-primary
-                    - if user_signed_in? and current_user.has_role? :buyer
-                        #cart = render "cart/partials/cart"
+                    #cart = render "cart/partials/cart"
 .container-fluid.mb-2            
     .row.border-top.px-xl-5    
             
