@@ -37,7 +37,7 @@
                         - if current_user.profile_picture.attached?
                             image.profile-picture.mr-lg-3 src = url_for(current_user.profile_picture)
                         - else
-                            = image_tag "images.jpg", class: "profile-picture mr-lg-3"
+                            = image_tag "images.png", class: "profile-picture mr-lg-3"
                         span.text.d-none.d-xl-inline = current_user.first_name if current_user.first_name.present?
                     .dropdown-menu.rounded-0.m-0.position-absolute
                         = link_to "Profile", user_path(current_user.username), class: "dropdown-item" 

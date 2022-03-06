@@ -22,14 +22,23 @@ class User < ApplicationRecord
     data = access_token.info
     user = User.find_by(email: data['email'])
 
-    # Uncomment the section below if you want users to be created if they don't exist
-    # unless user
-    #     user = User.create(
-    #        email: data['email'],
-    #        password: Devise.friendly_token[0,20]
-    #     )
-    # end
-    # Do something after login from 3rd party
+    unless user
+      first_name = ""
+      last_name = ""
+      if data.has_key?('first_name') && data.has_key?('last_name')
+        first_name = data['first_name']
+        last_name = data['last_name']
+      end
+      user = User.create(
+          email: data['email'],
+          username: data['email'].split("@").first,
+          first_name: first_name,
+          last_name: last_name,
+          password: Devise.friendly_token[0,20],
+          roles: [Role.find_by(name: "buyer")]
+      )
+      
+    end
     user
   end
 
