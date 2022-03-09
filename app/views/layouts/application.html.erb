@@ -30,5 +30,22 @@
     <%= javascript_pack_tag 'search' %>
     <%= javascript_pack_tag 'starRating' %>
     <%= javascript_pack_tag 'modalOpen', defer: true %>
+    <style>
+      a#customBtn:before {
+        content: '-';
+        background: url(
+          <%= asset_path 'google_icn.png' %>
+          ) no-repeat;
+        background-size: 20px;
+        position: absolute;
+        color: transparent;
+        left: 100px;
+        width: 20px;
+        top: 2px;
+      } 
+      a#customBtn {
+        position: relative;
+      }
+    </style>
   </body>
 </html>
